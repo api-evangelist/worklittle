@@ -1,0 +1,138 @@
+# Path Item fragments for jobs search
+jobs:
+  get:
+    tags: [jobs]
+    summary: Search jobs
+    description: |
+      List and search open jobs. Default order is newest first (posted_at).
+
+      When `near_lat` and `near_lng` are set, optional `sort` is:
+      - omit / `distance` — closest first (default)
+      - `newest` — posted_at descending
+      - `salary` — listed annualized pay descending, missing pay last
+
+      When `company` is a single slug, optional `sort` controls company-board order:
+      - `newest` (default) — posted_at descending
+      - `oldest` — posted_at ascending
+      - `relevance` — full company result set ranked by title match to `q` (or `title`);
+        does **not** filter. Classic filtered search remains `company` + `q` without
+        `sort=relevance`.
+
+      Omit `sort` for vanilla behavior (recommended for MCP and generic clients).
+    security: [{bearerAuth: []}]
+    parameters:
+      - {name: q, in: query, schema: {type: string}, description: Search string. With company+sort=relevance, ranks titles instead of filtering.}
+      - {name: title, in: query, schema: {type: string}, description: Title-only substring filter (or ranking key with sort=relevance).}
+      - {name: company, in: query, schema: {type: string}, description: "Exact company slug(s). Bare comma-separated = OR include (meta,google). Prefix with - to exclude (-lucid-motors,-tesla). Mix allowed."}
+      - name: sort
+        in: query
+        schema: {type: string, enum: [newest, oldest, relevance, distance, salary]}
+        description: Near lists — distance (default, omit) | newest | salary. Company lists (single slug) — newest | oldest | relevance (relevance requires q or title).
+      - {name: limit, in: query, schema: {type: integer}}
+      - {name: cursor, in: query, schema: {type: string}}
+    responses:
+      "200": {description: Job search results}
+jobById:
+  get:
+    tags: [jobs]
+    summary: Get job by id
+    security: [{bearerAuth: []}]
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    responses:
+      "200": {description: Job detail}
+jobsMap:
+  get:
+    tags: [jobs]
+    summary: Jobs map clusters
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: Map payload}
+salaryAverage:
+  get:
+    tags: [jobs]
+    summary: Salary average
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: Salary average}
+companies:
+  get:
+    tags: [jobs]
+    summary: Search companies
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: Companies}
+stats:
+  get:
+    tags: [jobs]
+    summary: Market overview stats
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: Stats}
+account:
+  get:
+    tags: [jobs]
+    summary: Authenticated API key owner
+    description: Returns the email, display name, photo, and resume readiness for the Bearer API key owner. Used by MCP Apps for account rows and Apply resume gate.
+    security: [{bearerAuth: []}]
+    responses:
+      "200":
+        description: Account identity
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: { type: string }
+                user_id: { type: string, nullable: true }
+                name: { type: string, nullable: true }
+                display_name: { type: string, nullable: true }
+                photo_url: { type: string, nullable: true }
+                key_prefix: { type: string, nullable: true }
+                has_resume_file: { type: boolean }
+                resume_file_name: { type: string, nullable: true }
+accountMcpLogout:
+  post:
+    tags: [jobs]
+    summary: Log out MCP Connect session
+    description: Revokes the current MCP connector API key and refresh tokens so the host re-prompts Connect without removing the app.
+    security: [{bearerAuth: []}]
+    responses:
+      "200":
+        description: Logged out
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ok: { type: boolean }
+                logged_out: { type: boolean }
+accountResume:
+  put:
+    tags: [jobs]
+    summary: Upload profile resume (API key)
+    description: Upload a resume for the API key owner. JSON body with content_base64, or raw bytes with Content-Type and X-Filename. Scope jobs:apply.
+    security: [{bearerAuth: []}]
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [filename, content_base64]
+            properties:
+              filename: { type: string }
+              mime: { type: string }
+              content_base64: { type: string }
+    responses:
+      "200":
+        description: Resume stored
+accountResumeStatus:
+  get:
+    tags: [jobs]
+    summary: Profile resume process status
+    description: Poll resume processing after upload. Scope jobs:apply.
+    security: [{bearerAuth: []}]
+    responses:
+      "200":
+        description: Status payload (ready | processing | idle | missing)

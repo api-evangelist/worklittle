@@ -1,0 +1,178 @@
+openapi: 3.1.0
+info:
+  title: Worklittle API
+  version: 1.0.0
+  description: |
+    Production Worklittle REST API for job search, public job boards, apply,
+    People Search, employer ATS (candidates, employees, email, offers),
+    surveys, HR documents, attendance/calendar, webhooks, and agent document tools.
+
+    Authenticate with `Authorization: Bearer sk-wl-api01-...`.
+    Public job-board GETs/applies work without a key (IP rate limits).
+
+    Official clients live in the Worklittle monorepo (`packages/sdk-js`, `packages/sdk-python`).
+    Public OpenAPI: https://docs.worklittle.com/openapi/openapi.yaml
+servers:
+  - url: https://api.worklittle.com
+security:
+  - bearerAuth: []
+tags:
+  - name: jobs
+  - name: boards
+  - name: apply
+  - name: people
+  - name: job-listings
+  - name: employer-jobs
+  - name: organization
+  - name: candidates
+  - name: employees
+  - name: email-offers
+  - name: webhooks
+  - name: documents
+  - name: attendance
+  - name: surveys
+  - name: agent-documents
+paths:
+  /jobs:
+    $ref: ./paths/jobs.yaml#/jobs
+  /jobs/{id}:
+    $ref: ./paths/jobs.yaml#/jobById
+  /jobs/map:
+    $ref: ./paths/jobs.yaml#/jobsMap
+  /jobs/salary-average:
+    $ref: ./paths/jobs.yaml#/salaryAverage
+  /companies:
+    $ref: ./paths/jobs.yaml#/companies
+  /stats:
+    $ref: ./paths/jobs.yaml#/stats
+  /account:
+    $ref: ./paths/jobs.yaml#/account
+  /account/mcp-logout:
+    $ref: ./paths/jobs.yaml#/accountMcpLogout
+  /account/resume:
+    $ref: ./paths/jobs.yaml#/accountResume
+  /account/resume/status:
+    $ref: ./paths/jobs.yaml#/accountResumeStatus
+  /job-boards/{company}:
+    $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}
+  /job-boards/{company}/board:
+    $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1board
+  /job-boards/{company}/jobs:
+    $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1jobs
+  /job-boards/{company}/facets:
+    $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1facets
+  /job-boards/{company}/jobs/{idOrSlug}:
+    $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1jobs~1{idOrSlug}
+  /job-boards/{company}/jobs/{idOrSlug}/json-ld:
+    $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1jobs~1{idOrSlug}~1json-ld
+  /job-boards/{company}/jobs/{idOrSlug}/parse-resume:
+    $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1jobs~1{idOrSlug}~1parse-resume
+  /job-boards/{company}/jobs/{idOrSlug}/apply:
+    $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1jobs~1{idOrSlug}~1apply
+  /jobs/{id}/apply:
+    $ref: ./paths/platform.yaml#/jobsApply
+  /applied-jobs:
+    $ref: ./paths/platform.yaml#/appliedJobs
+  /applied-jobs/counts:
+    $ref: ./paths/platform.yaml#/appliedJobsCounts
+  /people:
+    $ref: ./paths/platform.yaml#/people
+  /people/{id}/resume:
+    $ref: ./paths/platform.yaml#/peopleResume
+  /people/{id}/contact:
+    $ref: ./paths/platform.yaml#/peopleContact
+  /job-listings:
+    $ref: ./paths/platform.yaml#/jobListings
+  /job-listings/{id}:
+    $ref: ./paths/platform.yaml#/jobListingById
+  /jobs/post:
+    $ref: ./paths/platform.yaml#/jobsPost
+  /jobs/post/organization:
+    $ref: ./paths/platform.yaml#/jobsPostOrganization
+  /jobs/post/{id}:
+    $ref: ./paths/platform.yaml#/jobsPostById
+  /jobs/post/{id}/applications:
+    $ref: ./paths/platform.yaml#/jobsPostApplications
+  /company-organizations:
+    $ref: ./paths/platform.yaml#/companyOrganizations
+  /interview-questions:
+    $ref: ./paths/platform.yaml#/interviewQuestions
+  /candidates:
+    $ref: ./paths/platform.yaml#/candidates
+  /candidates/{id}:
+    $ref: ./paths/platform.yaml#/candidateById
+  /pipeline-stages:
+    $ref: ./paths/platform.yaml#/pipelineStages
+  /employees:
+    $ref: ./paths/platform.yaml#/employees
+  /employees/{id}:
+    $ref: ./paths/platform.yaml#/employeeById
+  /email-messages:
+    $ref: ./paths/platform.yaml#/emailMessages
+  /email/send:
+    $ref: ./paths/platform.yaml#/emailSend
+  /email/sends:
+    $ref: ./paths/platform.yaml#/emailSends
+  /email/sends/{id}:
+    $ref: ./paths/platform.yaml#/emailSendById
+  /email/sends/{id}/events:
+    $ref: ./paths/platform.yaml#/emailSendEvents
+  /usage:
+    $ref: ./paths/platform.yaml#/usage
+  /offers:
+    $ref: ./paths/platform.yaml#/offers
+  /webhooks:
+    $ref: ./paths/platform.yaml#/webhooks
+  /webhooks/{id}:
+    $ref: ./paths/platform.yaml#/webhookById
+  /webhook-deliveries:
+    $ref: ./paths/platform.yaml#/webhookDeliveries
+  /job-alerts:
+    $ref: ./paths/platform.yaml#/jobAlerts
+  /platform/documents:
+    $ref: ./paths/platform.yaml#/documents
+  /platform/documents/templates:
+    $ref: ./paths/platform.yaml#/documentTemplates
+  /platform/documents/mine:
+    $ref: ./paths/platform.yaml#/documentsMine
+  /attendance:
+    $ref: ./paths/platform.yaml#/attendance
+  /attendance/me:
+    $ref: ./paths/platform.yaml#/attendanceMe
+  /platform/surveys:
+    $ref: ./paths/platform.yaml#/surveys
+  /platform/surveys/{id}:
+    $ref: ./paths/platform.yaml#/surveyById
+  /v1/resumes:
+    $ref: ./paths/platform.yaml#/resumes
+  /v1/cover-letters:
+    $ref: ./paths/platform.yaml#/coverLetters
+  /v1/agent/tools:
+    $ref: ./paths/platform.yaml#/agentTools
+  /v1/agent/tool:
+    $ref: ./paths/platform.yaml#/agentTool
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: sk-wl-api01
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code: { type: string }
+            message: { type: string }
+            documentation_url:
+              type: string
+              format: uri
+              description: Present on UNAUTHORIZED, FORBIDDEN, WORK_EMAIL_REQUIRED, PAYMENT_REQUIRED, RATE_LIMITED, and QUOTA_EXCEEDED. Points at the Help article for that code.
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema: { type: string }

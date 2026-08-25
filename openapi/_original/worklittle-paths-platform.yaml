@@ -1,0 +1,519 @@
+# Platform / ATS / people / webhooks / docs path items
+
+jobsApply:
+  post:
+    tags: [apply]
+    summary: API-key apply to hosted job
+    security: [{bearerAuth: []}]
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+appliedJobs:
+  get:
+    tags: [apply]
+    summary: List applied jobs
+    security: [{bearerAuth: []}]
+    parameters:
+      - name: limit
+        in: query
+        schema: {type: integer, minimum: 1, maximum: 500, default: 200}
+      - name: offset
+        in: query
+        schema: {type: integer, minimum: 0, default: 0}
+      - name: status
+        in: query
+        description: Pipeline stage filter
+        schema:
+          type: string
+          enum:
+            [
+              saved,
+              in_progress,
+              applied,
+              interview,
+              offer,
+              rejected,
+              withdrawn,
+              skipped,
+              viewed,
+            ]
+      - name: fields
+        in: query
+        schema: {type: string, enum: [lite, full], default: lite}
+    responses:
+      "200": {description: OK — count, jobs, has_more}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+appliedJobsCounts:
+  get:
+    tags: [apply]
+    summary: Applied jobs board totals by stage
+    description: >
+      Cheap totals for /saved column badges. Returns `total` plus `by_status`
+      for every pipeline stage. Does not return job cards.
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK — total, by_status}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+people:
+  get:
+    tags: [people]
+    summary: Search people
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+peopleResume:
+  get:
+    tags: [people]
+    summary: Unlock person resume
+    security: [{bearerAuth: []}]
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+peopleContact:
+  get:
+    tags: [people]
+    summary: Unlock person contact field
+    security: [{bearerAuth: []}]
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+jobListings:
+  get:
+    tags: [job-listings]
+    summary: List or create job listings (POST)
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+jobListingById:
+  patch:
+    tags: [job-listings]
+    summary: Update or delete listing
+    security: [{bearerAuth: []}]
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+jobsPost:
+  get:
+    tags: [employer-jobs]
+    summary: List or create employer jobs (POST)
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+jobsPostOrganization:
+  get:
+    tags: [organization]
+    summary: Get or put posting organization
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+jobsPostById:
+  patch:
+    tags: [employer-jobs]
+    summary: Update or delete employer job
+    security: [{bearerAuth: []}]
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+jobsPostApplications:
+  get:
+    tags: [employer-jobs]
+    summary: List applications for job
+    security: [{bearerAuth: []}]
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+companyOrganizations:
+  get:
+    tags: [organization]
+    summary: Company organizations CRUD
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+interviewQuestions:
+  get:
+    tags: [organization]
+    summary: Interview questions
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+candidates:
+  get:
+    tags: [candidates]
+    summary: List or patch candidates
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+candidateById:
+  get:
+    tags: [candidates]
+    summary: Candidate detail
+    security: [{bearerAuth: []}]
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+pipelineStages:
+  get:
+    tags: [candidates]
+    summary: Pipeline stages
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+employees:
+  get:
+    tags: [employees]
+    summary: List or create employees
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+employeeById:
+  get:
+    tags: [employees]
+    summary: Employee detail
+    security: [{bearerAuth: []}]
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+emailMessages:
+  get:
+    tags: [email-offers]
+    summary: Email templates CRUD
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+emailSend:
+  post:
+    tags: [email-offers]
+    summary: Send ATS email
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+emailSends:
+  get:
+    tags: [email-offers]
+    summary: List org sent emails (ATS + automation) with open stats
+    security: [{bearerAuth: []}]
+    parameters:
+      - in: query
+        name: source
+        schema: {type: string, enum: [ats, automation, all]}
+      - in: query
+        name: status
+        schema: {type: string}
+      - in: query
+        name: since
+        schema: {type: integer}
+      - in: query
+        name: until
+        schema: {type: integer}
+      - in: query
+        name: candidate_id
+        schema: {type: string}
+      - in: query
+        name: cursor
+        schema: {type: string}
+      - in: query
+        name: limit
+        schema: {type: integer}
+    responses:
+      "200": {description: OK}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+emailSendById:
+  get:
+    tags: [email-offers]
+    summary: Get one sent email with open rollups
+    security: [{bearerAuth: []}]
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema: {type: string}
+    responses:
+      "200": {description: OK}
+      "404": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+emailSendEvents:
+  get:
+    tags: [email-offers]
+    summary: Open events for one sent email
+    security: [{bearerAuth: []}]
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema: {type: string}
+    responses:
+      "200": {description: OK}
+      "404": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+usage:
+  get:
+    tags: [billing]
+    summary: Usage / audit logs with Destination fields (where_label, where_href). Same stream as Business Usage.
+    description: >
+      Returns organization_logs (default source=all) including metered AI, free burns, and org activity.
+      Each row may include where_label / where_href (Chat and Voice open absolute chat URLs when chat_id is known;
+      Private has no link; job/survey/candidate destinations use product paths).
+      Filter with source=public_api|platform_ai|org_activity for single-source cursor pagination
+      (platform_ai and org_activity include where_*).
+    security: [{bearerAuth: []}]
+    parameters:
+      - in: query
+        name: source
+        schema: {type: string, enum: [all, public_api, platform_ai, platform_fees, org_activity]}
+      - in: query
+        name: since
+        schema: {type: integer}
+      - in: query
+        name: until
+        schema: {type: integer}
+      - in: query
+        name: cursor
+        schema: {type: string}
+      - in: query
+        name: limit
+        schema: {type: integer}
+      - in: query
+        name: api_key_id
+        schema: {type: string}
+      - in: query
+        name: route
+        schema: {type: string}
+      - in: query
+        name: status
+        schema: {type: string}
+    responses:
+      "200": {description: OK}
+      "401": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+offers:
+  get:
+    tags: [email-offers]
+    summary: Offers CRUD
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+webhooks:
+  get:
+    tags: [webhooks]
+    summary: List or create webhooks
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+webhookById:
+  get:
+    tags: [webhooks]
+    summary: Webhook detail / patch / delete
+    security: [{bearerAuth: []}]
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+webhookDeliveries:
+  get:
+    tags: [webhooks]
+    summary: Webhook deliveries
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+jobAlerts:
+  get:
+    tags: [webhooks]
+    summary: Job alerts CRUD
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+documents:
+  get:
+    tags: [documents]
+    summary: HR documents list/create
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+documentTemplates:
+  get:
+    tags: [documents]
+    summary: Document templates
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+documentsMine:
+  get:
+    tags: [documents]
+    summary: My documents
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+attendance:
+  get:
+    tags: [attendance]
+    summary: Attendance / calendar list
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+attendanceMe:
+  get:
+    tags: [attendance]
+    summary: My attendance
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+surveys:
+  get:
+    tags: [surveys]
+    summary: Surveys list/create
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+surveyById:
+  get:
+    tags: [surveys]
+    summary: Survey detail
+    security: [{bearerAuth: []}]
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+resumes:
+  post:
+    tags: [agent-documents]
+    summary: Generate resume
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+coverLetters:
+  post:
+    tags: [agent-documents]
+    summary: Generate cover letter
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+agentTools:
+  get:
+    tags: [agent-documents]
+    summary: List agent tools
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
+
+agentTool:
+  post:
+    tags: [agent-documents]
+    summary: Run agent tool
+    security: [{bearerAuth: []}]
+    responses:
+      "200": {description: OK}
+      "201": {description: Created}
+      "400": {$ref: "../openapi.yaml#/components/schemas/Error"}
