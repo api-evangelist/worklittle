@@ -1,0 +1,55 @@
+name: Worklittle
+description: >-
+  Workforce Intelligence API and MCP for job discovery, auto-apply, swipe-to-apply card UIs, commute search on an
+  interactive job map, plus an employer Business platform for postings, ATS pipeline, employees, HR documents, and
+  webhooks.
+url: https://raw.githubusercontent.com/api-evangelist/worklittle/refs/heads/main/apis.yml
+created: '2026-08-24'
+modified: '2026-08-24'
+specificationVersion: '0.21'
+tags:
+  - jobs
+  - employment
+  - recruiting
+  - hiring
+  - ATS
+  - job-search
+  - market-data
+  - agent-tools
+  - MCP
+apis:
+  - name: Worklittle API
+    description: >-
+      REST API for job discovery, apply flows, market data, and employer ATS/HR operations. Authenticated with Bearer
+      sk-wl-api01 keys; public job-board GETs and applies work without a key subject to rate limits.
+    humanURL: https://docs.worklittle.com/get-started/overview
+    baseURL: https://api.worklittle.com
+    tags:
+      - jobs
+      - employment
+      - recruiting
+      - hiring
+      - ATS
+      - job-search
+      - market-data
+      - agent-tools
+      - MCP
+    properties:
+      - type: OpenAPI
+        url: https://docs.worklittle.com/openapi/openapi.yaml
+      - type: Documentation
+        url: https://docs.worklittle.com
+      - type: LLMsTxt
+        url: https://docs.worklittle.com/llms.txt
+      - type: AgentSkill
+        url: https://docs.worklittle.com/.well-known/skills/index.json
+      - type: MCPServer
+        url: https://mcp.worklittle.com/
+maintainers:
+  - FN: Worklittle
+    url: https://worklittle.com
+generated:
+  by: apis.io/add
+  model: claude-opus-4-8
+  confidence: 97
+  at: '2026-08-24T23:59:12.220Z'
