@@ -28,27 +28,23 @@ tags_raw:
 - recruiting
 - workforce intelligence
 apis:
-- aid: worklittle:worklittle-api
-  name: Worklittle API
-  description: >-
-    Job discovery, auto-apply, commute search on a geocoded map, plus an employer workspace with
-    postings, ATS pipeline, employees, HR docs and webhooks. 59 operations, bearer auth.
+- aid: worklittle:worklittle-job-boards-api
+  name: Worklittle Job Boards API
+  description: The Job Boards API from Worklittle — 8 operation(s) for job boards.
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
-  - Jobs
-  - ATS
-  - Workforce
+  - Job Boards
   properties:
   - type: OpenAPI
-    url: openapi/_original/worklittle-openapi.yaml
+    url: openapi/worklittle-job-boards-api-openapi.yml
   - type: APIReference
     url: https://docs.worklittle.com/api-reference
   - type: Documentation
     url: https://docs.worklittle.com
-  - type: MCPServer
-    url: https://docs.worklittle.com/jobs/mcp
 common:
+- type: MCPServer
+  url: https://docs.worklittle.com/jobs/mcp
 - type: LLMsTxt
   url: llms/worklittle-llms.txt
 - type: AgentManifest
