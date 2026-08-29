@@ -11,6 +11,17 @@ description: >-
   manifest alongside a 97KB llms.txt.
 type: Index
 url: https://raw.githubusercontent.com/api-evangelist/worklittle/refs/heads/main/apis.yml
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - none
+  generated: '2026-08-28'
+  method: derived
 created: '2026-08-24'
 modified: '2026-08-24'
 specificationVersion: '0.23'
