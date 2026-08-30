@@ -1,0 +1,261 @@
+openapi: 3.2.0
+info:
+  title: Worklittle Job Boards API
+  version: 1.0.0
+  description: 'Public careers-board surface for custom employer sites.
+
+    Unauthenticated reads/applies use CORS `*`. Bearer API keys get higher GET rate limits.
+
+    '
+servers:
+- url: https://api.worklittle.com
+tags:
+- name: Job Boards
+paths:
+  /job-boards/{company}:
+    get:
+      summary: Organization board profile
+      parameters:
+      - $ref: '#/components/parameters/company'
+      responses:
+        '200':
+          description: Organization profile
+          headers:
+            ETag:
+              schema:
+                type: string
+      tags:
+      - Job Boards
+  /job-boards/{company}/board:
+    get:
+      summary: Organization + job list bundle
+      parameters:
+      - $ref: '#/components/parameters/company'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/cursor'
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/department'
+      - $ref: '#/components/parameters/workplace_type'
+      - $ref: '#/components/parameters/employment_type'
+      - $ref: '#/components/parameters/location'
+      - name: include
+        in: query
+        schema:
+          type: string
+          example: facets
+      responses:
+        '200':
+          description: Board bundle
+        '304':
+          description: Not modified
+      tags:
+      - Job Boards
+  /job-boards/{company}/jobs:
+    get:
+      summary: List public jobs
+      parameters:
+      - $ref: '#/components/parameters/company'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/cursor'
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/department'
+      - $ref: '#/components/parameters/workplace_type'
+      - $ref: '#/components/parameters/employment_type'
+      - $ref: '#/components/parameters/location'
+      responses:
+        '200':
+          description: Job summaries with slug and url_path
+      tags:
+      - Job Boards
+  /job-boards/{company}/facets:
+    get:
+      summary: Facet counts for listed jobs
+      parameters:
+      - $ref: '#/components/parameters/company'
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/location'
+      responses:
+        '200':
+          description: Facet counts
+      tags:
+      - Job Boards
+  /job-boards/{company}/jobs/{idOrSlug}:
+    get:
+      summary: Job detail
+      parameters:
+      - $ref: '#/components/parameters/company'
+      - $ref: '#/components/parameters/idOrSlug'
+      - name: preview
+        in: query
+        description: Employer preview_key for unpublished / non-public jobs
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'Job detail including application_fields, description_sections,
+
+            and description_sections_meta. Preview responses include `"preview": true`.
+
+            '
+      tags:
+      - Job Boards
+  /job-boards/{company}/jobs/{idOrSlug}/json-ld:
+    get:
+      summary: Google JobPosting JSON-LD helper
+      parameters:
+      - $ref: '#/components/parameters/company'
+      - $ref: '#/components/parameters/idOrSlug'
+      - name: canonical_url
+        in: query
+        schema:
+          type: string
+          format: uri
+      responses:
+        '200':
+          description: json_ld object plus description_sections
+      tags:
+      - Job Boards
+  /job-boards/{company}/jobs/{idOrSlug}/parse-resume:
+    post:
+      summary: Resume autofill for board forms
+      parameters:
+      - $ref: '#/components/parameters/company'
+      - $ref: '#/components/parameters/idOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - resume_file
+              properties:
+                resume_file:
+                  $ref: '#/components/schemas/ResumeFile'
+      responses:
+        '200':
+          description: Autofill map
+        '400':
+          description: role_closed | resume_autofill_disabled | validation errors
+      tags:
+      - Job Boards
+  /job-boards/{company}/jobs/{idOrSlug}/apply:
+    post:
+      summary: Submit application (public)
+      parameters:
+      - $ref: '#/components/parameters/company'
+      - $ref: '#/components/parameters/idOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplyBody'
+      responses:
+        '201':
+          description: Application created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  application:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+        '400':
+          description: 'Error codes include role_closed, duplicate_application,
+
+            validation_error, resume_autofill_disabled.
+
+            '
+      tags:
+      - Job Boards
+components:
+  parameters:
+    department:
+      name: department
+      in: query
+      schema:
+        type: string
+    location:
+      name: location
+      in: query
+      schema:
+        type: string
+    employment_type:
+      name: employment_type
+      in: query
+      schema:
+        type: string
+    q:
+      name: q
+      in: query
+      schema:
+        type: string
+    workplace_type:
+      name: workplace_type
+      in: query
+      schema:
+        type: string
+        enum:
+        - remote
+        - hybrid
+        - on_site
+    idOrSlug:
+      name: idOrSlug
+      in: path
+      required: true
+      description: public_job_id, posted job id, or public_slug
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 25
+    cursor:
+      name: cursor
+      in: query
+      schema:
+        type: string
+    company:
+      name: company
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    ResumeFile:
+      type: object
+      required:
+      - filename
+      - content_base64
+      properties:
+        filename:
+          type: string
+        content_base64:
+          type: string
+        mime:
+          type: string
+    ApplyBody:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        resume_file:
+          $ref: '#/components/schemas/ResumeFile'
+        answers:
+          type: object
+          additionalProperties: true
+        similar_job_alerts:
+          type: boolean
