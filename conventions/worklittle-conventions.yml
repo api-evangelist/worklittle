@@ -1,0 +1,62 @@
+generated: '2026-09-03'
+method: searched
+source: https://docs.worklittle.com (errors, rate-limits, api-keys, webhooks, SDK pages) + openapi/
+authentication:
+  style: Bearer API key (sk-wl-api01- prefix) on REST, MCP, SDK and CLI; OAuth 2.0 authorization_code + PKCE for MCP Connect sessions; public job-board GETs/applies keyless under IP limits.
+  cross_link: authentication/worklittle-authentication.yml
+idempotency:
+  coverage: none
+  header: null
+  note: >-
+    No Idempotency-Key header or replay-protection mechanism is documented or declared in the
+    OpenAPI for any write. Outbound webhooks carry a Worklittle-Webhook-Id delivery id for consumer
+    dedupe, but inbound API writes (apply, candidates, listings, webhooks CRUD) publish no
+    idempotency contract. Failed/errored requests are not billed, which softens — but does not
+    replace — replay protection on the paid apply route.
+pagination:
+  style: cursor
+  params: [limit, cursor]
+  response_fields: [meta.next_cursor, meta.limit]
+  note: GET /jobs, /companies and job-board list routes; data[] rows are snippets — fetch GET /jobs/{id} for the full record.
+field_conventions:
+  ids: job_id (hosted index id), candidate/experience/education/interview ids per resource
+  timestamps: webhook created_at is Unix seconds (not ISO)
+request_tracing:
+  note: SDK surfaces a requestId on WorklittleError when present; no documented request-id header name.
+versioning:
+  scheme: unversioned root; /v1/ prefix only on agent tool routes
+  cross_link: lifecycle/worklittle-lifecycle.yml
+error_envelope:
+  shape: '{"error":{"code","message","documentation_url"}}'
+  cross_link: errors/worklittle-problem-types.yml
+rate_limit_signaling:
+  status: 429
+  codes: [RATE_LIMITED, QUOTA_EXCEEDED]
+  headers: [Retry-After]
+  note: Retry-After 60 on the per-key throttle; no X-RateLimit-* headers documented.
+  cross_link: rate-limits/worklittle-rate-limits.yml
+caching:
+  note: Job-board profile and board routes return ETag and support 304 Not Modified (declared in openapi/worklittle-job-boards-api-openapi.yml).
+reversibility:
+  grade: documented
+  note: >-
+    Read-heavy surface with a handful of writes. Documented reversal pairs and windows, from the
+    provider's own docs only:
+  writes:
+  - operation: "POST /jobs/apply (Apply with AI session)"
+    reversal: "stop / take control — docs state you can watch the cloud browser and take control anytime before submit (wl.apply.stopWithAi in the SDK)"
+    window: before the application is submitted
+    docs: https://docs.worklittle.com/help/apply-with-ai/watching-browser
+  - operation: "API key create (POST /api-keys)"
+    reversal: "revoke (DELETE /api-keys/:id)"
+    window: "revocation is immediate and explicitly cannot be undone — the reversal itself is irreversible"
+    docs: https://docs.worklittle.com/jobs/get-started/api-keys
+  - operation: account deletion (app surface)
+    reversal: cancel deletion
+    window: three-day grace window stated in the provider's help docs
+    docs: https://docs.worklittle.com/help/account/delete-account
+  - operation: "candidate/listing/webhook deletes (MCP + session routes)"
+    reversal: none documented
+    window: null
+    docs: https://docs.worklittle.com/business/mcp
+dry_run: none documented

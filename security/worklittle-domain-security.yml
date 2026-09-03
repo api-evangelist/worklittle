@@ -1,0 +1,26 @@
+generated: '2026-09-03'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: worklittle.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 27 12:29:25 2026 GMT
+  hsts: false
+- host: docs.worklittle.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 24 02:12:14 2026 GMT
+  hsts: false
+- host: api.worklittle.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 24 02:11:08 2026 GMT
+  hsts: null
+domains:
+- domain: worklittle.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

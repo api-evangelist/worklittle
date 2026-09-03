@@ -39,6 +39,10 @@ jobById:
     security: [{bearerAuth: []}]
     parameters:
       - {name: id, in: path, required: true, schema: {type: string}}
+      - name: summary
+        in: query
+        schema: {type: string, enum: ["true", "1", "yes"]}
+        description: Opt in to first-time AI job-description generation. Omit for raw description_text plus any already-cached AI.
     responses:
       "200": {description: Job detail}
 jobsMap:

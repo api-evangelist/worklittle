@@ -1,0 +1,56 @@
+generated: '2026-09-03'
+method: searched
+status: published
+source: https://docs.worklittle.com/jobs/mcp
+server:
+  name: worklittle
+  transport: http
+  url: https://mcp.worklittle.com/
+deployment:
+  mode: remote
+  endpoint: https://mcp.worklittle.com/
+  auth: api-key
+  verified: probed
+  note: >-
+    Probed 2026-09-03: POST tools/list to https://mcp.worklittle.com/ (and /mcp) answers 200
+    anonymously with 13 Jobs tools including full inputSchema — saved verbatim to
+    mcp/worklittle-mcp-tools.json. Docs state 101 tools total; ATS/webhook/business tools require
+    an Authorization: Bearer sk-wl-api01- key. The server also participates in OAuth: its RFC 9728
+    oauth-protected-resource document names api.worklittle.com as authorization server
+    (authorization_code + PKCE, dynamic client registration, scopes jobs:read / jobs:apply /
+    jobs:apply_with_ai), so both api-key and OAuth flows are published. JSON-RPC 2.0 over
+    Streamable HTTP, protocol 2026-07-28 plus legacy 2025-06-18 / 2024-11-05 initialize.
+protocol: JSON-RPC 2.0 over Streamable HTTP (2026-07-28; legacy 2025-06-18 / 2024-11-05)
+docs:
+- https://docs.worklittle.com/jobs/mcp
+- https://docs.worklittle.com/business/mcp
+tool_count_documented: 101
+tool_count_anonymous: 13
+tools:
+- name: search_jobs
+  description: Search Worklittle's job listings by keyword, company, location, job type, seniority, or recency.
+- name: search_companies
+  description: Search companies in the Worklittle index.
+- name: get_job_details
+  description: Fetch detailed information about a specific job.
+- name: get_job_keywords
+  description: Skill and technology keywords extracted from a job description.
+- name: get_market_overview
+  description: Aggregate statistics about the current job market as indexed by Worklittle.
+- name: track_applied_job
+  description: Track an externally applied job against the caller's account.
+- name: delete_applied_job
+  description: Remove a tracked applied job.
+- name: get_account
+  description: Authenticated API key owner / account details.
+- name: upload_resume
+  description: Upload a profile resume for the caller's account.
+- name: get_resume
+  description: Read the stored profile resume.
+- name: delete_resume
+  description: Delete the stored profile resume.
+- name: update_account
+  description: Update account/profile fields.
+- name: apply_for_job
+  description: Start Apply with AI for a job (billed AI tokens).
+tools_file: worklittle-mcp-tools.json

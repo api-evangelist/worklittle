@@ -1,0 +1,34 @@
+generated: '2026-09-03'
+method: searched
+source: https://docs.worklittle.com/jobs/resources/rate-limits
+sources:
+- https://docs.worklittle.com/jobs/resources/rate-limits
+- https://docs.worklittle.com/business/resources/rate-limits
+limit_count: 10
+response_signaling:
+  status: 429
+  error_codes: [RATE_LIMITED, QUOTA_EXCEEDED]
+  headers:
+  - {header: Retry-After, value: '60', when: per-key throttle}
+  note: No X-RateLimit-*/RateLimit-* headers documented; MCP surfaces upstream 429s as JSON-RPC errors.
+limits:
+- {scope: per-key, window: 1 minute, limit: 60, applies_to: all keyed REST routes (1-minute KV window)}
+- {scope: per-IP, window: 1 minute, limit: 120, applies_to: public job-board profile/list/detail routes}
+- {scope: per-IP, window: 1 minute, limit: 20, applies_to: public job-board apply and parse-resume}
+- {scope: per-IP, window: 1 minute, limit: 30, applies_to: public job-board sitemap}
+- {scope: per-org monthly quota, window: UTC month, limit: 1000, applies_to: jobs returned (GET /jobs / MCP search_jobs)}
+- {scope: per-org monthly quota, window: UTC month, limit: 1000, applies_to: companies returned (GET /companies)}
+- {scope: per-org monthly quota, window: UTC month, limit: 1000, applies_to: company map requests (GET /jobs/map)}
+- {scope: per-org monthly quota, window: UTC month, limit: 1000, applies_to: salary-average requests}
+- scope: per-org daily quota
+  window: UTC day
+  limit: 100
+  applies_to: "first-time AI job-description generations (GET /jobs/:id?summary=true) — soft; bills tokens after"
+- scope: per-org monthly quota
+  window: UTC month
+  limit: 100
+  applies_to: platform email sends (POST /email/send + work email)
+notes: >-
+  Custom-column compute rows (structured/sandbox_js/hybrid, 1000 rows/org) and sandbox Python
+  (1000 jobs/org) share the Business quota table. Webhook delivery is outbound and not counted
+  against the inbound key limit. Higher limits via business@worklittle.com.

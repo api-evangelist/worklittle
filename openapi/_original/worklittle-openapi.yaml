@@ -35,118 +35,94 @@ tags:
 paths:
   /jobs:
     $ref: ./paths/jobs.yaml#/jobs
+  /jobs/search:
+    $ref: ./paths/jobs.yaml#/jobs
   /jobs/{id}:
     $ref: ./paths/jobs.yaml#/jobById
   /jobs/map:
     $ref: ./paths/jobs.yaml#/jobsMap
-  /jobs/salary-average:
-    $ref: ./paths/jobs.yaml#/salaryAverage
+  /jobs/stats:
+    $ref: ./paths/jobs.yaml#/stats
+  /jobs/suggestions:
+    $ref: ./paths/jobs.yaml#/jobs
+  /jobs/apply:
+    $ref: ./paths/platform.yaml#/jobsApply
+  /jobs/apply/{id}:
+    $ref: ./paths/platform.yaml#/jobsApply
+  /jobs/applied:
+    $ref: ./paths/platform.yaml#/appliedJobs
+  /jobs/applied/{id}:
+    $ref: ./paths/platform.yaml#/appliedJobs
+  /jobs/saved:
+    $ref: ./paths/platform.yaml#/appliedJobsCounts
+  /jobs/resumes:
+    $ref: ./paths/platform.yaml#/resumes
+  /jobs/cover-letters:
+    $ref: ./paths/platform.yaml#/coverLetters
   /companies:
     $ref: ./paths/jobs.yaml#/companies
-  /stats:
-    $ref: ./paths/jobs.yaml#/stats
   /account:
     $ref: ./paths/jobs.yaml#/account
-  /account/mcp-logout:
-    $ref: ./paths/jobs.yaml#/accountMcpLogout
   /account/resume:
     $ref: ./paths/jobs.yaml#/accountResume
-  /account/resume/status:
-    $ref: ./paths/jobs.yaml#/accountResumeStatus
-  /job-boards/{company}:
-    $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}
-  /job-boards/{company}/board:
-    $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1board
-  /job-boards/{company}/jobs:
+  /business/jobs/company/{company}:
     $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1jobs
-  /job-boards/{company}/facets:
-    $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1facets
-  /job-boards/{company}/jobs/{idOrSlug}:
+  /business/jobs/company/{company}/brand:
+    $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1board
+  /business/jobs/company/{company}/{idOrSlug}:
     $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1jobs~1{idOrSlug}
-  /job-boards/{company}/jobs/{idOrSlug}/json-ld:
+  /business/jobs/company/{company}/{idOrSlug}/json-ld:
     $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1jobs~1{idOrSlug}~1json-ld
-  /job-boards/{company}/jobs/{idOrSlug}/parse-resume:
+  /business/jobs/company/{company}/{idOrSlug}/parse-resume:
     $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1jobs~1{idOrSlug}~1parse-resume
-  /job-boards/{company}/jobs/{idOrSlug}/apply:
+  /business/jobs/company/{company}/{idOrSlug}/submit-application:
     $ref: ./job-boards.yaml#/paths/~1job-boards~1{company}~1jobs~1{idOrSlug}~1apply
-  /jobs/{id}/apply:
-    $ref: ./paths/platform.yaml#/jobsApply
-  /applied-jobs:
-    $ref: ./paths/platform.yaml#/appliedJobs
-  /applied-jobs/counts:
-    $ref: ./paths/platform.yaml#/appliedJobsCounts
   /people:
     $ref: ./paths/platform.yaml#/people
   /people/{id}/resume:
     $ref: ./paths/platform.yaml#/peopleResume
   /people/{id}/contact:
     $ref: ./paths/platform.yaml#/peopleContact
-  /job-listings:
+  /business/jobs:
     $ref: ./paths/platform.yaml#/jobListings
-  /job-listings/{id}:
+  /business/jobs/{id}:
     $ref: ./paths/platform.yaml#/jobListingById
-  /jobs/post:
-    $ref: ./paths/platform.yaml#/jobsPost
-  /jobs/post/organization:
-    $ref: ./paths/platform.yaml#/jobsPostOrganization
-  /jobs/post/{id}:
-    $ref: ./paths/platform.yaml#/jobsPostById
-  /jobs/post/{id}/applications:
+  /business/jobs/{id}/applications:
     $ref: ./paths/platform.yaml#/jobsPostApplications
-  /company-organizations:
-    $ref: ./paths/platform.yaml#/companyOrganizations
-  /interview-questions:
-    $ref: ./paths/platform.yaml#/interviewQuestions
-  /candidates:
-    $ref: ./paths/platform.yaml#/candidates
-  /candidates/{id}:
-    $ref: ./paths/platform.yaml#/candidateById
-  /pipeline-stages:
+  /business/jobs/pipeline-stages:
     $ref: ./paths/platform.yaml#/pipelineStages
-  /employees:
+  /business/teams:
+    $ref: ./paths/platform.yaml#/companyOrganizations
+  /business/questions:
+    $ref: ./paths/platform.yaml#/interviewQuestions
+  /business/candidates:
+    $ref: ./paths/platform.yaml#/candidates
+  /business/candidates/{id}:
+    $ref: ./paths/platform.yaml#/candidateById
+  /business/employees:
     $ref: ./paths/platform.yaml#/employees
-  /employees/{id}:
+  /business/employees/{id}:
     $ref: ./paths/platform.yaml#/employeeById
-  /email-messages:
+  /business/emails:
     $ref: ./paths/platform.yaml#/emailMessages
-  /email/send:
-    $ref: ./paths/platform.yaml#/emailSend
-  /email/sends:
+  /business/emails/sent:
     $ref: ./paths/platform.yaml#/emailSends
-  /email/sends/{id}:
+  /business/emails/sent/{id}:
     $ref: ./paths/platform.yaml#/emailSendById
-  /email/sends/{id}/events:
-    $ref: ./paths/platform.yaml#/emailSendEvents
   /usage:
     $ref: ./paths/platform.yaml#/usage
-  /offers:
-    $ref: ./paths/platform.yaml#/offers
-  /webhooks:
+  /business/webhooks:
     $ref: ./paths/platform.yaml#/webhooks
-  /webhooks/{id}:
+  /business/webhooks/{id}:
     $ref: ./paths/platform.yaml#/webhookById
-  /webhook-deliveries:
-    $ref: ./paths/platform.yaml#/webhookDeliveries
-  /job-alerts:
-    $ref: ./paths/platform.yaml#/jobAlerts
-  /platform/documents:
+  /business/documents:
     $ref: ./paths/platform.yaml#/documents
-  /platform/documents/templates:
-    $ref: ./paths/platform.yaml#/documentTemplates
-  /platform/documents/mine:
-    $ref: ./paths/platform.yaml#/documentsMine
-  /attendance:
+  /business/attendance:
     $ref: ./paths/platform.yaml#/attendance
-  /attendance/me:
-    $ref: ./paths/platform.yaml#/attendanceMe
-  /platform/surveys:
+  /business/surveys:
     $ref: ./paths/platform.yaml#/surveys
-  /platform/surveys/{id}:
+  /business/surveys/{id}:
     $ref: ./paths/platform.yaml#/surveyById
-  /v1/resumes:
-    $ref: ./paths/platform.yaml#/resumes
-  /v1/cover-letters:
-    $ref: ./paths/platform.yaml#/coverLetters
   /v1/agent/tools:
     $ref: ./paths/platform.yaml#/agentTools
   /v1/agent/tool:

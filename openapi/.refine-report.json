@@ -1,0 +1,31 @@
+{
+  "provider": "worklittle",
+  "sources": [
+    "worklittle-job-boards.yaml",
+    "worklittle-openapi.yaml"
+  ],
+  "outputs": [
+    "worklittle-job-boards-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/worklittle-job-boards.yaml",
+    "archived openapi/worklittle-openapi.yaml"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "worklittle-job-boards.yaml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "worklittle-job-boards.yaml: tagged paths GET /job-boards/{company} -> Job Boards",
+    "worklittle-job-boards.yaml: tagged paths GET /job-boards/{company}/board -> Job Boards",
+    "worklittle-job-boards.yaml: tagged paths GET /job-boards/{company}/jobs -> Job Boards",
+    "worklittle-job-boards.yaml: tagged paths GET /job-boards/{company}/facets -> Job Boards",
+    "worklittle-job-boards.yaml: tagged paths GET /job-boards/{company}/jobs/{idOrSlug} -> Job Boards",
+    "worklittle-job-boards.yaml: tagged paths GET /job-boards/{company}/jobs/{idOrSlug}/json-ld -> Job Boards",
+    "worklittle-job-boards.yaml: tagged paths POST /job-boards/{company}/jobs/{idOrSlug}/parse-resume -> Job Boards",
+    "worklittle-job-boards.yaml: tagged paths POST /job-boards/{company}/jobs/{idOrSlug}/apply -> Job Boards",
+    "worklittle-job-boards.yaml: declared missing tag: Job Boards",
+    "worklittle-openapi.yaml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+1 apis, 1 total)"
+  ],
+  "skipped": []
+}

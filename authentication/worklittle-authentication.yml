@@ -1,0 +1,39 @@
+generated: '2026-09-03'
+method: searched
+source: openapi/worklittle-jobs-api-openapi.yml, openapi/worklittle-platform-api-openapi.yml
+docs: https://docs.worklittle.com/jobs/get-started/api-keys
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: sk-wl-api01
+  description: >-
+    API keys created in Worklittle Business (worklittle.com/business/api-keys), prefix sk-wl-api01-,
+    shown once. Sent as Authorization Bearer on REST, MCP and CLI/SDK (WORKLITTLE_API_KEY). Keys
+    carry scopes (jobs:read, jobs:apply, jobs:post, jobs:applications, webhooks:manage, agent:tools)
+    and inherit the creator's role. Default 60 requests/minute per key. Public job-board GETs and
+    applies work without a key under IP rate limits.
+  sources:
+  - openapi/worklittle-jobs-api-openapi.yml
+  - openapi/worklittle-platform-api-openapi.yml
+- name: mcpConnectOAuth
+  type: oauth2
+  description: >-
+    OAuth 2.0 authorization server on api.worklittle.com (RFC 8414 metadata saved at
+    well-known/worklittle-oauth-authorization-server.json) used by MCP Connect sessions:
+    authorization_code + refresh_token, PKCE S256, dynamic client registration (RFC 7591),
+    client_id metadata documents and resource indicators. The MCP server publishes a matching
+    RFC 9728 protected-resource document naming this issuer.
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.worklittle.com/oauth/authorize
+    tokenUrl: https://api.worklittle.com/oauth/token
+    scopes: 6
+  sources:
+  - well-known/worklittle-oauth-authorization-server.json

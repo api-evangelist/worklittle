@@ -1,0 +1,19 @@
+generated: '2026-09-03'
+method: searched
+source: https://docs.worklittle.com/business/resources/status, https://docs.worklittle.com/resources/release-notes
+versioning:
+  scheme: unversioned-root
+  current: 1.0.0
+  docs: https://docs.worklittle.com/api-reference
+  note: Routes live at the api.worklittle.com root (only agent tools sit under /v1/); GET /health reports {"status":"ok","version":"1.0.0"} (probed 2026-09-03, HTTP 200).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No published deprecation policy or RFC 8594 Sunset support. One surface is currently withdrawn — public People Search returns 410 GONE with code GONE while disabled, and the people:read scope is marked reserved.
+sla:
+  url: null
+status_page: https://docs.worklittle.com/business/resources/status
+status_page_note: Docs status page polls GET https://api.worklittle.com/health every minute ("Live health"); no separate status.worklittle.com host.
+health_endpoint: https://api.worklittle.com/health
+release_notes: https://docs.worklittle.com/resources/release-notes
+deprecated_operations: []

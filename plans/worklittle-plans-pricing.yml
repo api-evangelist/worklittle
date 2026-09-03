@@ -1,0 +1,38 @@
+generated: '2026-09-03'
+method: searched
+source: https://docs.worklittle.com/jobs/get-started/pricing
+sources:
+- https://docs.worklittle.com/jobs/get-started/pricing
+- https://docs.worklittle.com/business/get-started/pricing
+plan_count: 3
+model: usage-based AI-token billing plus one consumer subscription; most REST surface free with an API key inside monthly quotas
+plans:
+- name: Pay as you go (Jobs API / MCP)
+  price: 0
+  currency: USD
+  billing_period: monthly (UTC month, charged when accrued usage ≥ $0.50, earlier at $20 owed)
+  included:
+  - "AI tokens billed at $2.50 per 1M input / $15.00 per 1M output"
+  - "Apply (POST /jobs/apply / MCP apply_for_job): ~$0.01–$0.03 per application"
+  - "create_resume / create_cover_letter: ~<$0.01 each; chat ~<$0.005 per message"
+  - "Free monthly quotas: 1000 jobs returned, 1000 companies returned, 1000 map requests, 1000 salary-average requests; 100 free AI job-description generations/org/day"
+  - "Hosted apply (POST /jobs/:id/apply): $0.01 per successful submit"
+  overage: token rates after free quotas; QUOTA_EXCEEDED (429) on hard quotas
+- name: Worklittle Instant
+  price: 9.99
+  currency: USD
+  billing_period: monthly
+  included:
+  - "$20 monthly AI credit to the Personal organization"
+  - up to 2,000 included applications per month
+  url: https://worklittle.com/instant
+- name: Business Platform
+  price: 0
+  currency: USD
+  billing_period: monthly (UTC)
+  included:
+  - "$0.10 free monthly AI credit per company organization, then tokens pay-as-you-go at the same rates"
+  - ATS, posting, emails and most compute free within monthly quotas (custom-column rows 1000/org, sandbox Python 1000 jobs/org, platform email 100 messages/org)
+  - job listings and most ATS routes free with an API key
+  overage: AI tokens; spend limits configurable at worklittle.com/business/billing#limits
+notes: Failed calls are free (tokens already used still bill). Custom pricing / higher limits via business@worklittle.com.

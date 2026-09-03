@@ -1,0 +1,34 @@
+generated: '2026-09-03'
+method: searched
+source: https://docs.worklittle.com/jobs/libraries/cli
+binary: worklittle
+install:
+- method: homebrew
+  command: brew install worklittle/tap/worklittle
+  note: Recommended; tap github.com/worklittle/homebrew-tap (verified 200); installs Node 18+ as dependency.
+- method: curl
+  command: curl -fsSL https://worklittle.com/install | bash
+  note: Verifies the CLI checksum from manifest.json; default path ~/.local/bin/worklittle (WORKLITTLE_INSTALL_PREFIX overrides).
+- method: npm
+  command: npm install -g worklittle
+  note: CLI binary ships inside the npm `worklittle` package (1.1.8, 2026-09-03).
+auth: WORKLITTLE_API_KEY env var (preferred) or --api-key flag; Bearer sk-wl-api01- keys.
+usage: "worklittle <group> <action> [args] [--flag value] [--body '{}'] [--pretty|--json] [--api-key KEY]"
+flags:
+- {flag: --pretty, effect: indented JSON on stdout}
+- {flag: --json, effect: compact JSON (default)}
+- {flag: --api-key, effect: override WORKLITTLE_API_KEY}
+- {flag: --base-url, effect: override https://api.worklittle.com}
+- {flag: --body, effect: JSON body for POST/PATCH}
+- {flag: "--q --title --limit --cursor --id --company", effect: query params matching GET /jobs; other GET /jobs flags pass through by name}
+commands:
+- group: jobs
+  actions: [search, get, map, salary-average]
+- group: companies
+  actions: [search]
+- group: stats
+  actions: [get]
+- group: candidates
+  actions: [list, get]
+exit_codes: {0: success, 2: 401/403, 1: other failures}
+output: JSON on stdout; errors as JSON on stderr.

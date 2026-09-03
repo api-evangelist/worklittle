@@ -1,0 +1,55 @@
+generated: '2026-09-03'
+method: searched
+source: https://docs.worklittle.com/jobs/resources/errors
+format: custom-envelope
+envelope: '{"error":{"code","message","documentation_url"}}'
+note: >-
+  documentation_url is present on UNAUTHORIZED, FORBIDDEN, WORK_EMAIL_REQUIRED, PAYMENT_REQUIRED,
+  RATE_LIMITED and QUOTA_EXCEEDED; other codes omit it. Derived 4xx/5xx coverage cross-checked
+  against openapi/ responses; MCP wraps upstream errors in JSON-RPC codes.
+problems:
+- status: 400
+  code: BAD_REQUEST
+  title: Invalid query filters, apply payload, candidate stage or listing payload
+- status: 401
+  code: UNAUTHORIZED
+  title: Missing or invalid API key or session
+  documentation_url: https://docs.worklittle.com/help/api/api-key-not-working
+- status: 402
+  code: PAYMENT_REQUIRED
+  title: AI token usage without a valid billing card / limit; metered email
+  remediation: Add a card on Billing or raise the spend limit; do not retry.
+- status: 403
+  code: FORBIDDEN
+  title: Scope missing (jobs:read, jobs:apply, jobs:post, jobs:applications, webhooks:manage, agent:tools)
+- status: 403
+  code: WORK_EMAIL_REQUIRED
+  title: Verified work email required for company identity operations
+- status: 404
+  code: NOT_FOUND
+  title: Unknown job, company, candidate, listing or org resource
+- status: 410
+  code: GONE
+  title: Public People Search is temporarily disabled
+- status: 429
+  code: RATE_LIMITED
+  title: Per-key throttle (60 requests/minute)
+  remediation: Honor Retry-After (60s) and back off exponentially.
+- status: 429
+  code: QUOTA_EXCEEDED
+  title: Free monthly quota exhausted
+  remediation: Wait for the UTC month reset or contact business@worklittle.com for higher limits.
+- status: 500
+  code: INTERNAL_ERROR
+  title: Upstream failure
+mcp_jsonrpc:
+- code: -32700
+  meaning: Parse error
+- code: -32600
+  meaning: Invalid request (often auth)
+- code: -32601
+  meaning: Method or tool not found
+- code: -32602
+  meaning: Invalid params
+- code: -32603
+  meaning: Internal error (may wrap upstream 429/5xx)

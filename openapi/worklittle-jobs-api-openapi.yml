@@ -1,0 +1,332 @@
+openapi: 3.1.0
+info:
+  title: Worklittle Jobs API
+  version: 1.0.0
+  description: 'Consumer Jobs surface of the Worklittle API: market-wide job search, job detail, map clusters, company
+    search, market stats, account, and profile resume upload. Resolved from the provider''s $ref-based root spec
+    at https://docs.worklittle.com/openapi/openapi.yaml (paths/jobs.yaml fragments). Authenticate with Authorization:
+    Bearer sk-wl-api01-....'
+servers:
+- url: https://api.worklittle.com
+security:
+- bearerAuth: []
+paths:
+  /jobs:
+    get:
+      tags:
+      - jobs
+      summary: Search jobs
+      description: "List and search open jobs. Default order is newest first (posted_at).\n\nWhen `near_lat` and\
+        \ `near_lng` are set, optional `sort` is:\n- omit / `distance` — closest first (default)\n- `newest` — posted_at\
+        \ descending\n- `salary` — listed annualized pay descending, missing pay last\n\nWhen `company` is a single\
+        \ slug, optional `sort` controls company-board order:\n- `newest` (default) — posted_at descending\n- `oldest`\
+        \ — posted_at ascending\n- `relevance` — full company result set ranked by title match to `q` (or `title`);\n\
+        \  does **not** filter. Classic filtered search remains `company` + `q` without\n  `sort=relevance`.\n\n\
+        Omit `sort` for vanilla behavior (recommended for MCP and generic clients).\n"
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+        description: Search string. With company+sort=relevance
+        ranks titles instead of filtering.: null
+      - name: title
+        in: query
+        schema:
+          type: string
+        description: Title-only substring filter (or ranking key with sort=relevance).
+      - name: company
+        in: query
+        schema:
+          type: string
+        description: Exact company slug(s). Bare comma-separated = OR include (meta,google). Prefix with - to exclude
+          (-lucid-motors,-tesla). Mix allowed.
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum:
+          - newest
+          - oldest
+          - relevance
+          - distance
+          - salary
+        description: Near lists — distance (default, omit) | newest | salary. Company lists (single slug) — newest
+          | oldest | relevance (relevance requires q or title).
+      - name: limit
+        in: query
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Job search results
+  /jobs/search:
+    get:
+      tags:
+      - jobs
+      summary: Search jobs
+      description: "List and search open jobs. Default order is newest first (posted_at).\n\nWhen `near_lat` and\
+        \ `near_lng` are set, optional `sort` is:\n- omit / `distance` — closest first (default)\n- `newest` — posted_at\
+        \ descending\n- `salary` — listed annualized pay descending, missing pay last\n\nWhen `company` is a single\
+        \ slug, optional `sort` controls company-board order:\n- `newest` (default) — posted_at descending\n- `oldest`\
+        \ — posted_at ascending\n- `relevance` — full company result set ranked by title match to `q` (or `title`);\n\
+        \  does **not** filter. Classic filtered search remains `company` + `q` without\n  `sort=relevance`.\n\n\
+        Omit `sort` for vanilla behavior (recommended for MCP and generic clients).\n"
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+        description: Search string. With company+sort=relevance
+        ranks titles instead of filtering.: null
+      - name: title
+        in: query
+        schema:
+          type: string
+        description: Title-only substring filter (or ranking key with sort=relevance).
+      - name: company
+        in: query
+        schema:
+          type: string
+        description: Exact company slug(s). Bare comma-separated = OR include (meta,google). Prefix with - to exclude
+          (-lucid-motors,-tesla). Mix allowed.
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum:
+          - newest
+          - oldest
+          - relevance
+          - distance
+          - salary
+        description: Near lists — distance (default, omit) | newest | salary. Company lists (single slug) — newest
+          | oldest | relevance (relevance requires q or title).
+      - name: limit
+        in: query
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Job search results
+  /jobs/{id}:
+    get:
+      tags:
+      - jobs
+      summary: Get job by id
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: summary
+        in: query
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - '1'
+          - 'yes'
+        description: Opt in to first-time AI job-description generation. Omit for raw description_text plus any
+          already-cached AI.
+      responses:
+        '200':
+          description: Job detail
+  /jobs/map:
+    get:
+      tags:
+      - jobs
+      summary: Jobs map clusters
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Map payload
+  /jobs/stats:
+    get:
+      tags:
+      - jobs
+      summary: Market overview stats
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Stats
+  /jobs/suggestions:
+    get:
+      tags:
+      - jobs
+      summary: Search jobs
+      description: "List and search open jobs. Default order is newest first (posted_at).\n\nWhen `near_lat` and\
+        \ `near_lng` are set, optional `sort` is:\n- omit / `distance` — closest first (default)\n- `newest` — posted_at\
+        \ descending\n- `salary` — listed annualized pay descending, missing pay last\n\nWhen `company` is a single\
+        \ slug, optional `sort` controls company-board order:\n- `newest` (default) — posted_at descending\n- `oldest`\
+        \ — posted_at ascending\n- `relevance` — full company result set ranked by title match to `q` (or `title`);\n\
+        \  does **not** filter. Classic filtered search remains `company` + `q` without\n  `sort=relevance`.\n\n\
+        Omit `sort` for vanilla behavior (recommended for MCP and generic clients).\n"
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+        description: Search string. With company+sort=relevance
+        ranks titles instead of filtering.: null
+      - name: title
+        in: query
+        schema:
+          type: string
+        description: Title-only substring filter (or ranking key with sort=relevance).
+      - name: company
+        in: query
+        schema:
+          type: string
+        description: Exact company slug(s). Bare comma-separated = OR include (meta,google). Prefix with - to exclude
+          (-lucid-motors,-tesla). Mix allowed.
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum:
+          - newest
+          - oldest
+          - relevance
+          - distance
+          - salary
+        description: Near lists — distance (default, omit) | newest | salary. Company lists (single slug) — newest
+          | oldest | relevance (relevance requires q or title).
+      - name: limit
+        in: query
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Job search results
+  /companies:
+    get:
+      tags:
+      - jobs
+      summary: Search companies
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Companies
+  /account:
+    get:
+      tags:
+      - jobs
+      summary: Authenticated API key owner
+      description: Returns the email, display name, photo, and resume readiness for the Bearer API key owner. Used
+        by MCP Apps for account rows and Apply resume gate.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Account identity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                  user_id:
+                    type: string
+                    nullable: true
+                  name:
+                    type: string
+                    nullable: true
+                  display_name:
+                    type: string
+                    nullable: true
+                  photo_url:
+                    type: string
+                    nullable: true
+                  key_prefix:
+                    type: string
+                    nullable: true
+                  has_resume_file:
+                    type: boolean
+                  resume_file_name:
+                    type: string
+                    nullable: true
+  /account/resume:
+    put:
+      tags:
+      - jobs
+      summary: Upload profile resume (API key)
+      description: Upload a resume for the API key owner. JSON body with content_base64, or raw bytes with Content-Type
+        and X-Filename. Scope jobs:apply.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - filename
+              - content_base64
+              properties:
+                filename:
+                  type: string
+                mime:
+                  type: string
+                content_base64:
+                  type: string
+      responses:
+        '200':
+          description: Resume stored
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: sk-wl-api01
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            documentation_url:
+              type: string
+              format: uri
+              description: Present on UNAUTHORIZED, FORBIDDEN, WORK_EMAIL_REQUIRED, PAYMENT_REQUIRED, RATE_LIMITED,
+                and QUOTA_EXCEEDED. Points at the Help article for that code.
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+tags:
+- name: jobs

@@ -1,0 +1,45 @@
+generated: '2026-09-03'
+method: derived
+source: openapi/worklittle-jobs-api-openapi.yml, openapi/worklittle-platform-api-openapi.yml, openapi/worklittle-job-boards-api-openapi.yml
+entities:
+- entity: Job
+  ids: [job_id]
+  note: "market-wide index row; snippets in data[]; full record at GET /jobs/{id}"
+- entity: Company
+  note: shared companies table (slugs); also university companies for education rows
+- entity: Organization
+  note: employer workspace; owns listings, candidates, employees, webhooks, surveys, documents
+- entity: JobListing
+  note: employer-posted ATS listing (/business/jobs); publishes to the public index and job boards
+- entity: Application
+  note: candidate application on a posted job; private to the posting organization
+- entity: Candidate
+  note: ATS record with pipeline stage, notes, interviews, experience, education, skills, answers
+- entity: Employee
+  note: post-hire record with employment periods and performance feedback
+- entity: Webhook
+  note: registered endpoint with signing secret and delivery log
+- entity: WebhookDelivery
+  ids: ["wh_…"]
+  note: per-delivery record for retries/dedupe
+- entity: Survey
+  note: org surveys with responses and sentiment rollups
+- entity: Document
+  note: HR documents and templates; HTML/PDF/DOCX renditions
+- entity: Offer
+  note: offer records tied to candidates and email templates
+- entity: Resume/CoverLetter
+  note: candidate documents; profile resume via PUT /account/resume
+relationships:
+- {from: Organization, to: JobListing, type: has_many}
+- {from: JobListing, to: Application, type: has_many, via: "/business/jobs/{id}/applications"}
+- {from: Application, to: Candidate, type: belongs_to}
+- {from: Candidate, to: PipelineStage, type: belongs_to, via: stage_key}
+- {from: Candidate, to: Experience-Education-Interview-Note, type: has_many}
+- {from: Candidate, to: Company, type: belongs_to, via: experience company link (shared companies table)}
+- {from: Organization, to: Employee, type: has_many}
+- {from: Organization, to: Webhook, type: has_many}
+- {from: Webhook, to: WebhookDelivery, type: has_many, via: endpoint_id}
+- {from: Organization, to: Survey-Document-Offer, type: has_many}
+- {from: Job, to: Company, type: belongs_to, via: company_name / company slug}
+- {from: JobListing, to: Job, type: has_one, via: "public_job_id (hosted index id in job.* webhook payloads)"}

@@ -1,0 +1,112 @@
+generated: '2026-09-03'
+method: derived
+source: mcp/worklittle-mcp-tools.json + openapi/worklittle-jobs-api-openapi.yml + openapi/worklittle-platform-api-openapi.yml + docs.worklittle.com pricing/api pages
+note: >-
+  The provider's OpenAPI declares no operationIds, so bindings use METHOD /path. The 13 tools below
+  the surfaces block are the anonymously introspectable set; three more (create_resume,
+  create_cover_letter, submit_job_application) are documented with explicit REST equivalents on the
+  provider's pricing and MCP pages. The remaining documented tools (101 total per docs) require an
+  authenticated tools/list and are not mapped here — no fabrication.
+surfaces:
+  openapi:
+  - openapi/worklittle-jobs-api-openapi.yml
+  - openapi/worklittle-platform-api-openapi.yml
+  - openapi/worklittle-job-boards-api-openapi.yml
+  mcp:
+    url: https://mcp.worklittle.com/
+    gated: partial — 13 Jobs tools enumerate anonymously; ATS/business tools need a Bearer key
+crosswalk:
+- tool: search_jobs
+  category: jobs
+  rest: ["GET /jobs"]
+  binding: rest
+  confidence: high
+  note: Docs bind them explicitly ("GET /jobs / MCP search_jobs"); /jobs/search is a published alias path.
+- tool: search_companies
+  category: jobs
+  rest: ["GET /companies"]
+  binding: rest
+  confidence: high
+- tool: get_job_details
+  category: jobs
+  rest: ["GET /jobs/{id}"]
+  binding: rest
+  confidence: high
+  note: Docs bind them explicitly ("GET /jobs/:id / MCP get_job_details").
+- tool: get_market_overview
+  category: jobs
+  rest: ["GET /jobs/stats"]
+  binding: rest
+  confidence: high
+  note: Pricing table binds them ("GET /jobs/stats, MCP get_market_overview").
+- tool: get_account
+  category: account
+  rest: ["GET /account"]
+  binding: rest
+  confidence: high
+- tool: upload_resume
+  category: account
+  rest: ["PUT /account/resume"]
+  binding: rest
+  confidence: medium
+  note: Only PUT is published; the tool's semantics match the profile-resume upload route.
+- tool: apply_for_job
+  category: apply
+  rest: ["POST /jobs/apply"]
+  binding: rest
+  confidence: high
+  note: Pricing binds them ("Apply (POST /jobs/apply / MCP apply_for_job)"). Billed AI tokens.
+- tool: create_resume
+  category: documents
+  rest: ["POST /jobs/resumes"]
+  binding: rest
+  confidence: high
+  note: Documented tool (not in the anonymous 13); SDK docs bind wl.resumes.* to POST /jobs/resumes.
+- tool: create_cover_letter
+  category: documents
+  rest: ["POST /jobs/cover-letters"]
+  binding: rest
+  confidence: high
+  note: Documented tool (not in the anonymous 13); SDK docs bind wl.coverLetters.* to POST /jobs/cover-letters.
+- tool: submit_job_application
+  category: apply
+  rest: ["POST /jobs/{id}/apply"]
+  binding: rest
+  confidence: high
+  note: Documented tool (not in the anonymous 13); docs bind it ("POST /jobs/:id/apply, MCP submit_job_application"). The path is served but absent from the current published root spec.
+mcp_only:
+- tool: get_job_keywords
+  reason: No keyword-extraction route in the published OpenAPI.
+- tool: get_resume
+  reason: Published spec exposes only PUT /account/resume; the read route is not in the contract.
+- tool: delete_resume
+  reason: Published spec exposes only PUT /account/resume; the delete route is not in the contract.
+- tool: update_account
+  reason: Published spec exposes only GET /account; the update route is not in the contract.
+- tool: track_applied_job
+  reason: Published spec exposes GET /jobs/applied only; the tracked-application write routes are not in the contract.
+- tool: delete_applied_job
+  reason: Published spec exposes GET /jobs/applied/{id} only; the delete route is not in the contract.
+rest_only:
+- capability: public job boards
+  operations: ["GET /job-boards/{company}", "GET /job-boards/{company}/board", "GET /job-boards/{company}/jobs", "GET /job-boards/{company}/facets", "GET /job-boards/{company}/jobs/{idOrSlug}", "GET /job-boards/{company}/jobs/{idOrSlug}/json-ld", "POST /job-boards/{company}/jobs/{idOrSlug}/parse-resume", "POST /job-boards/{company}/jobs/{idOrSlug}/apply"]
+- capability: jobs discovery extras
+  operations: ["GET /jobs/search", "GET /jobs/map", "GET /jobs/suggestions"]
+- capability: apply-with-ai session management
+  operations: ["POST /jobs/apply/{id}", "GET /jobs/applied", "GET /jobs/applied/{id}", "GET /jobs/saved"]
+- capability: people search
+  operations: ["GET /people", "GET /people/{id}/resume", "GET /people/{id}/contact"]
+- capability: employer ATS reads
+  operations: ["GET /business/jobs", "PATCH /business/jobs/{id}", "GET /business/jobs/{id}/applications", "GET /business/jobs/pipeline-stages", "GET /business/teams", "GET /business/questions", "GET /business/candidates", "GET /business/candidates/{id}", "GET /business/employees", "GET /business/employees/{id}"]
+  note: The authenticated MCP catalog documents ATS tools (list_candidates, update_candidates, ...) that likely cover these; unmapped here because their schemas are gated.
+- capability: email, usage, webhooks, documents, attendance, surveys
+  operations: ["GET /business/emails", "GET /business/emails/sent", "GET /business/emails/sent/{id}", "GET /usage", "GET /business/webhooks", "GET /business/webhooks/{id}", "GET /business/documents", "GET /business/attendance", "GET /business/surveys", "GET /business/surveys/{id}"]
+- capability: agent document tools
+  operations: ["GET /v1/agent/tools", "POST /v1/agent/tool"]
+coverage:
+  tools_documented: 101
+  tools_enumerated_anonymously: 13
+  tools_mapped: 10
+  mcp_only: 6
+  rest_operations_total: 49
+  rest_operations_with_tool: 10

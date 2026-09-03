@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Worklittle Business Platform API
+  version: 1.0.0
+extends: openapi/worklittle-platform-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist:
+      generated: '2026-09-03'
+      note: Spec resolved from the provider's $ref-based root (docs.worklittle.com/openapi/openapi.yaml, paths/platform.yaml fragments); provider tag names preserved.
+- target: $.info
+  update:
+    x-webhooks: asyncapi/worklittle-webhooks.yml
+    x-scopes: scopes/worklittle-scopes.yml
+    x-authentication: authentication/worklittle-authentication.yml

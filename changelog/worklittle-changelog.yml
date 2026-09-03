@@ -1,0 +1,26 @@
+generated: '2026-09-03'
+method: searched
+source: https://docs.worklittle.com/resources/release-notes
+scheme: dated release notes (newest first, grouped New features / Improvements and bug fixes)
+current_version: 1.0.0 (GET /health)
+entries:
+- date: '2026-08-21'
+  title: Filter plugins by category
+  type: additions
+  highlights: Category chips on Worklittle Business Plugins.
+- date: '2026-08-16'
+  title: Gift credits to friends, family, and colleagues
+  type: additions
+  highlights: Gift usage credit from Refer or Billing; buy credit $1–$500; credit history on Billing.
+- date: '2026-08-14'
+  title: Refer and earn
+  type: additions
+  highlights: Up to $50 usage credit for referring new users; credits auto-added to balance.
+- date: '2026-08-10'
+  title: Better usage insights
+  type: additions
+  highlights: Usage breaks spend into Free/Credit/Card; per-chat spend; org spend totals for a date range.
+- date: '2026-08-07'
+  title: Quick actions on jobs
+  type: additions
+  highlights: Right-click / press-and-hold job cards to save, share, find similar, or open the original listing.

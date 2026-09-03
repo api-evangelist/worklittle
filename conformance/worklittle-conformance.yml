@@ -1,0 +1,42 @@
+generated: '2026-09-03'
+method: derived
+source: openapi/ + well-known/ + docs.worklittle.com
+standards:
+- id: oauth2
+  conforms: true
+  evidence: RFC 8414 authorization-server metadata served at api.worklittle.com/.well-known/oauth-authorization-server (authorization_code, refresh_token, PKCE S256); saved at well-known/worklittle-oauth-authorization-server.json.
+- id: oauth2-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported [S256] in the RFC 8414 document.
+- id: oauth2-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint https://api.worklittle.com/oauth/register in the RFC 8414 document (RFC 7591).
+- id: rfc9728-protected-resource
+  conforms: true
+  evidence: mcp.worklittle.com/.well-known/oauth-protected-resource names api.worklittle.com as authorization server; saved at well-known/worklittle-oauth-protected-resource.json.
+- id: oidc
+  conforms: false
+  evidence: openid/email/profile scopes are offered but no /.well-known/openid-configuration is served on any host (404 probed 2026-09-03).
+- id: mcp
+  conforms: true
+  evidence: Live MCP server at mcp.worklittle.com; anonymous tools/list answered protocol 2026-07-28 Streamable HTTP (plus legacy 2025-06-18 / 2024-11-05 initialize per docs).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a custom {"error":{code,message,documentation_url}} envelope, not application/problem+json (docs.worklittle.com/jobs/resources/errors).
+- id: pagination
+  conforms: true
+  evidence: Cursor pagination — limit/cursor parameters and meta.next_cursor across /jobs, /companies and job-board list routes in the OpenAPI.
+- id: webhook-signing
+  conforms: true
+  evidence: HMAC-SHA256 v1=<hmac> over timestamp.body with Worklittle-Webhook-Id/-Timestamp/-Signature headers (docs.worklittle.com/business/webhooks/integration).
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key header or replay-protection mechanism in the spec or docs; webhook deliveries carry a dedupe id but API writes do not.
+domain_standards:
+- id: schema-org-jobposting
+  conforms: true
+  evidence: >-
+    The contract declares a Google/schema.org JobPosting JSON-LD surface — GET
+    /job-boards/{company}/jobs/{idOrSlug}/json-ld ("Google JobPosting JSON-LD helper") in
+    openapi/worklittle-job-boards-api-openapi.yml, emitting the JobPosting structured-data shape
+    job boards publish for Google Jobs indexing.

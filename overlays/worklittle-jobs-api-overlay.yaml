@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Worklittle Jobs API
+  version: 1.0.0
+extends: openapi/worklittle-jobs-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist:
+      generated: '2026-09-03'
+      note: Spec resolved from the provider's $ref-based root (docs.worklittle.com/openapi/openapi.yaml, paths/jobs.yaml fragments); tags normalized to one declared tag set.
+- target: $.info
+  update:
+    x-rate-limits: rate-limits/worklittle-rate-limits.yml
+    x-error-catalog: errors/worklittle-problem-types.yml
+    x-conventions: conventions/worklittle-conventions.yml

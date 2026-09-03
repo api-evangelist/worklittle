@@ -1,0 +1,1 @@
+{"resource":"https://mcp.worklittle.com","authorization_servers":["https://api.worklittle.com"],"scopes_supported":["jobs:read","jobs:apply","jobs:apply_with_ai"],"resource_documentation":"https://docs.worklittle.com/mcp"}

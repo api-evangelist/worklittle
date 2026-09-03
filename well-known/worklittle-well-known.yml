@@ -1,0 +1,137 @@
+generated: '2026-09-03'
+method: searched
+note: >-
+  Probed 2026-09-03 across all five hosts. Two real documents: RFC 8414 OAuth authorization-server
+  metadata on api.worklittle.com (issuer api.worklittle.com, authorization_code + refresh_token,
+  PKCE S256, dynamic client registration, scopes jobs:read / jobs:apply / jobs:apply_with_ai /
+  openid / email / profile) and an RFC 9728 oauth-protected-resource document on
+  mcp.worklittle.com naming api.worklittle.com as its authorization server. worklittle.com and
+  www.worklittle.com are SPA catch-alls — they answered 200 text/html (17,804 bytes) for every
+  probed path INCLUDING the negative control /.well-known/worklittle-negative-control-a63bffdd.json,
+  so their 200s are recorded as misses. docs.worklittle.com 404s the well-known surface properly
+  but returns its HTML docs shell (5,636 bytes) for /apis.json and /apis.yml — HTML, not an index.
+  mcp.worklittle.com answers 405 to GET on everything except its protected-resource document.
+  No security.txt, api-catalog, apis.json, ai-plugin, ucp/acp, aauth-resource, or A2A agent card
+  is served anywhere.
+path_echo_control:
+  path: /.well-known/worklittle-negative-control-a63bffdd.json
+  result: worklittle.com and www.worklittle.com answered 200 text/html (catch-all); api, docs and mcp hosts correctly missed it
+hosts:
+- host: https://api.worklittle.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: worklittle-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://mcp.worklittle.com
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: worklittle-oauth-protected-resource.json
+  - path: /.well-known/security.txt
+    status: 405
+  - path: /.well-known/openid-configuration
+    status: 405
+  - path: /.well-known/oauth-authorization-server
+    status: 405
+  - path: /.well-known/api-catalog
+    status: 405
+  - path: /.well-known/ai-plugin.json
+    status: 405
+  - path: /.well-known/ucp.json
+    status: 405
+  - path: /.well-known/acp.json
+    status: 405
+  - path: /.well-known/aauth-resource.json
+    status: 405
+  - path: /.well-known/apis.json
+    status: 405
+  - path: /apis.json
+    status: 405
+  - path: /apis.yml
+    status: 405
+  - path: /.well-known/agent-card.json
+    status: 405
+  - path: /.well-known/agent.json
+    status: 405
+- host: https://docs.worklittle.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 200
+    note: HTML docs shell (5,636 bytes), not an APIs.json index — recorded as a miss
+  - path: /apis.yml
+    status: 200
+    note: HTML docs shell (5,636 bytes), not an APIs.json index — recorded as a miss
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://worklittle.com
+  soft_404_control: 200 text/html 17,804 bytes on the negative control — SPA catch-all; every probed path returned the same shell
+  hit_count: 0
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+- host: https://www.worklittle.com
+  soft_404_control: 200 text/html 17,804 bytes on the negative control — SPA catch-all; every probed path returned the same shell
+  hit_count: 0
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404

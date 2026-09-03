@@ -1,0 +1,47 @@
+generated: '2026-09-03'
+method: searched
+source: https://docs.worklittle.com/business/webhooks/overview
+spec_type: Webhooks
+note: No AsyncAPI document is published; this captures the documented webhook catalog verbatim.
+transport: HTTPS POST to a registered endpoint URL; deliveries recorded in webhook_deliveries; failed deliveries retry with backoff.
+management:
+  rest:
+  - "GET, POST /webhooks"
+  - "GET, PATCH, DELETE /webhooks/:id"
+  - "POST /webhooks/:id/secret (rotate signing secret)"
+  - "POST /webhooks/:id/test (send webhook.test)"
+  - "GET /webhook-deliveries?endpoint_id=&limit= (delivery log)"
+  mcp: [list_webhooks, create_webhook, update_webhook, delete_webhook, rotate_webhook_secret, test_webhook, list_webhook_deliveries]
+payload:
+  shape: '{"id":"wh_…","type":"…","created_at":<unix seconds>,"data":{…}}'
+  note: Respond 2xx quickly; job.published/updated/closed add board-cache fields (public_job_id, slug, organization.slug, public_visible, accepting_applicants).
+signing:
+  headers:
+  - {header: Worklittle-Webhook-Id, purpose: unique delivery id (dedupe)}
+  - {header: Worklittle-Webhook-Timestamp, purpose: Unix timestamp}
+  - {header: Worklittle-Webhook-Signature, purpose: "v1=<hmac> HMAC-SHA256 over timestamp.body"}
+  guidance: Verify over the raw body before JSON parsing; reject requests older than a few minutes.
+events:
+- candidate.application_submitted
+- candidate.updated
+- candidate.deleted
+- candidate.stage_changed
+- candidate.note_created
+- candidate.bookmarked
+- candidate.unbookmarked
+- job.created
+- job.updated
+- job.closed
+- job.published
+- offer.created
+- offer.updated
+- offer.deleted
+- survey.response_submitted
+- survey.sentiment_average_below
+- survey.response_count_reached
+- survey.deleted
+- organization.member_joined
+- organization.member_role_changed
+- organization.member_left
+- webhook.test
+wildcard: '"*" subscribes to all types'

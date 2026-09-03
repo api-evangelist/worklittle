@@ -1,0 +1,35 @@
+generated: '2026-09-03'
+method: searched
+source: https://github.com/worklittle/agent-skills
+note: >-
+  Two sets. provider/ is the provider's own published Agent Skills repo
+  (github.com/worklittle/agent-skills, 13 skills with SKILL.md + references, indexed by
+  provider/skills-index.json) saved verbatim 2026-09-03 — searched. The three worklittle-*.md files
+  at this level are API Evangelist-generated skills grounded in the resolved OpenAPI — generated.
+provider_skills:
+- provider/worklittle-best-practices/SKILL.md
+- provider/worklittle-docs/SKILL.md
+- provider/job-search/SKILL.md
+- provider/apply-with-ai/SKILL.md
+- provider/resume-cover-letter/SKILL.md
+- provider/job-alerts/SKILL.md
+- provider/market-stats/SKILL.md
+- provider/people-search/SKILL.md
+- provider/post-a-job/SKILL.md
+- provider/candidates/SKILL.md
+- provider/employees/SKILL.md
+- provider/capability-map/SKILL.md
+- provider/mcp-install/SKILL.md
+skills:
+- file: worklittle-search-and-apply.md
+  name: Search jobs and apply on Worklittle
+  api: openapi/worklittle-jobs-api-openapi.yml
+  operations: ["GET /jobs", "GET /jobs/{id}", "POST /jobs/{id}/apply", "POST /jobs/apply"]
+- file: worklittle-embedded-careers-board.md
+  name: Build an embedded careers board
+  api: openapi/worklittle-job-boards-api-openapi.yml
+  operations: ["GET /job-boards/{company}/board", "GET /job-boards/{company}/jobs/{idOrSlug}", "POST /job-boards/{company}/jobs/{idOrSlug}/apply"]
+- file: worklittle-ats-webhooks.md
+  name: Sync hiring events with webhooks
+  api: openapi/worklittle-platform-api-openapi.yml
+  operations: ["GET /business/webhooks", "GET /business/webhooks/{id}"]

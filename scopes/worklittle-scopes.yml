@@ -1,0 +1,57 @@
+generated: '2026-09-03'
+method: searched
+source: https://api.worklittle.com/.well-known/oauth-authorization-server
+docs: https://docs.worklittle.com/jobs/get-started/api-keys
+note: >-
+  The OpenAPI declares only bearer keys, but the provider both documents key scopes and serves
+  RFC 8414 authorization-server metadata (saved at well-known/worklittle-oauth-authorization-server.json)
+  used for MCP Connect OAuth. Scope list below is the union of the discovery document's
+  scopes_supported and the scope tables on the API-keys and pricing docs pages.
+schemes:
+- name: OAuth2 (MCP Connect)
+  source: well-known/worklittle-oauth-authorization-server.json
+  issuer: https://api.worklittle.com
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.worklittle.com/oauth/authorize
+    tokenUrl: https://api.worklittle.com/oauth/token
+  registration_endpoint: https://api.worklittle.com/oauth/register
+  pkce: [S256]
+  grant_types: [authorization_code, refresh_token]
+- name: bearerAuth (API keys)
+  source: openapi/worklittle-jobs-api-openapi.yml
+  note: sk-wl-api01- prefixed keys; scopes attached per key.
+scopes:
+- scope: jobs:read
+  description: "GET /jobs, GET /jobs/:id, GET /jobs/map, GET /jobs/stats, GET /account; MCP search/read tools."
+  sources: [oauth-authorization-server, docs api-keys]
+- scope: jobs:apply
+  description: "POST /jobs/:id/apply and MCP submit_job_application."
+  sources: [oauth-authorization-server, docs api-keys]
+- scope: jobs:apply_with_ai
+  description: Apply-with-AI sessions via MCP Connect OAuth.
+  sources: [oauth-authorization-server]
+- scope: jobs:post
+  description: "Post and manage job listings (/business/jobs, /jobs/manage)."
+  sources: [docs pricing]
+- scope: jobs:applications
+  description: "ATS candidate, employee, offer, email-template and organization routes."
+  sources: [docs pricing]
+- scope: webhooks:manage
+  description: "/webhooks CRUD and delivery log."
+  sources: [docs pricing]
+- scope: agent:tools
+  description: "POST /jobs/resumes, POST /jobs/cover-letters, POST /v1/agent/tool."
+  sources: [docs api-keys]
+- scope: people:read
+  description: Reserved — public People Search is temporarily unavailable (410 GONE).
+  sources: [docs api-keys]
+- scope: openid
+  description: OIDC identity scope on the MCP Connect authorization server.
+  sources: [oauth-authorization-server]
+- scope: email
+  description: OIDC email scope on the MCP Connect authorization server.
+  sources: [oauth-authorization-server]
+- scope: profile
+  description: OIDC profile scope on the MCP Connect authorization server.
+  sources: [oauth-authorization-server]

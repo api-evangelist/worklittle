@@ -1,0 +1,40 @@
+generated: '2026-09-03'
+method: searched
+source: registry.npmjs.org, pypi.org, docs.worklittle.com/jobs/libraries/sdk, docs.worklittle.com/jobs/libraries/cli
+packages:
+- language: javascript
+  registry: npm
+  name: worklittle
+  url: https://www.npmjs.com/package/worklittle
+  install: npm install worklittle
+  official: true
+  version: 1.1.8
+  published: '2026-09-03'
+  note: Official Worklittle TypeScript SDK and CLI (binary `worklittle`); reads WORKLITTLE_API_KEY. Verified via registry.npmjs.org metadata.
+- language: javascript
+  registry: npm
+  name: "@worklittle/sdk"
+  url: https://www.npmjs.com/package/@worklittle/sdk
+  install: npm install @worklittle/sdk
+  official: true
+  version: 1.1.8
+  published: '2026-09-03'
+  note: Same code as the `worklittle` npm package under the org scope, per the provider's CLI docs.
+- language: python
+  registry: pypi
+  name: worklittle
+  url: https://pypi.org/project/worklittle/
+  install: pip install worklittle
+  official: true
+  version: 1.1.3
+  published: '2026-09-03'
+  note: Official Python SDK; project URLs point at docs.worklittle.com/libraries. Verified via pypi.org/pypi/worklittle/json.
+- language: shell
+  registry: homebrew
+  name: worklittle/tap/worklittle
+  url: https://github.com/worklittle/homebrew-tap
+  install: brew install worklittle/tap/worklittle
+  official: true
+  version: null
+  published: null
+  note: Recommended CLI install per docs; Homebrew tap has no unauthenticated version metadata endpoint — version rides the npm `worklittle` package it wraps (1.1.8).

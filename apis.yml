@@ -1,14 +1,15 @@
 aid: worklittle
 name: Worklittle
-description: >-
-  Worklittle is a workforce-intelligence platform covering job discovery, auto-apply, embedded
-  careers boards, ATS sync and sourcing over one API. It splits into two halves: Jobs, the
-  market-wide index plus candidate-facing apply and document tools including commute search on a
-  geocoded job map, and Business, an employer hiring workspace with postings, an ATS pipeline,
-  employees, HR documents and webhooks. The public contract is an OpenAPI 3.1 document of 59 paths
-  and 59 operations served from api.worklittle.com with bearer authentication. Worklittle also
-  operates an MCP server documented for Cursor, Claude and VS Code, and publishes a 1.4MB agent
-  manifest alongside a 97KB llms.txt.
+description: 'Worklittle is a workforce-intelligence platform covering job discovery, auto-apply, embedded
+  careers boards, ATS sync and sourcing over one API. It splits into two halves: Jobs, the market-wide
+  index plus candidate-facing apply and document tools including commute search on a geocoded job map,
+  and Business, an employer hiring workspace with postings, an ATS pipeline, employees, HR documents and
+  webhooks. The public contract is a $ref-based OpenAPI 3.1 document served from docs.worklittle.com/openapi/openapi.yaml
+  resolving to 47 paths across jobs, platform and job-board surfaces on api.worklittle.com, with bearer
+  sk-wl-api01 authentication plus an OAuth 2.0 authorization server (RFC 8414, PKCE, dynamic registration)
+  backing MCP Connect. Worklittle operates a live remote MCP server at mcp.worklittle.com (101 documented
+  tools, 13 anonymously introspectable), ships first-party TypeScript and Python SDKs and a CLI on npm,
+  PyPI and Homebrew, and publishes a 99KB llms.txt plus a docs agent manifest.'
 type: Index
 url: https://raw.githubusercontent.com/api-evangelist/worklittle/refs/heads/main/apis.yml
 deliveryModel:
@@ -23,18 +24,24 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 created: '2026-08-24'
-modified: '2026-08-24'
+modified: '2026-09-03'
 specificationVersion: '0.23'
 tags:
 - Job Search
 - ATS
 - Recruiting
 - Workforce Intelligence
+- Job Boards
+- Webhooks
+- MCP
 tags_raw:
 - job search
 - ats
 - recruiting
 - workforce intelligence
+- job boards
+- webhooks
+- mcp
 apis:
 - aid: worklittle:worklittle-job-boards-api
   name: Worklittle Job Boards API
@@ -50,9 +57,47 @@ apis:
     url: https://docs.worklittle.com/api-reference
   - type: Documentation
     url: https://docs.worklittle.com
+- aid: worklittle:worklittle-jobs-api
+  name: Worklittle Jobs API
+  description: The consumer Jobs surface of the Worklittle API — 9 operations for market-wide job search,
+    job detail, map clusters, suggestions, company search, market stats, account and profile resume upload.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - Jobs
+  - Job Search
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-jobs-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/jobs/get-started/overview
+- aid: worklittle:worklittle-platform-api
+  name: Worklittle Business Platform API
+  description: The Business/platform surface of the Worklittle API — 32 operations for apply and Apply-with-AI
+    sessions, People Search, employer job listings, candidates and pipeline, employees, email and offers,
+    webhooks, documents, attendance, surveys and agent document tools.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - ATS
+  - Recruiting
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-platform-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
 common:
+- type: Authentication
+  url: authentication/worklittle-authentication.yml
+- type: DomainSecurity
+  url: security/worklittle-domain-security.yml
 - type: MCPServer
-  url: https://docs.worklittle.com/jobs/mcp
+  url: mcp/worklittle-mcp.yml
 - type: LLMsTxt
   url: llms/worklittle-llms.txt
 - type: AgentManifest
@@ -60,6 +105,60 @@ common:
 - type: Website
   url: https://worklittle.com
 - type: DeveloperPortal
+  url: https://docs.worklittle.com
+- type: Packages
+  url: packages/worklittle-packages.yml
+- type: SDKs
+  url: packages/worklittle-packages.yml
+- type: CLI
+  url: cli/worklittle-cli.yml
+- type: WellKnown
+  url: well-known/worklittle-well-known.yml
+- type: ToolCrosswalk
+  url: mcp/worklittle-tool-crosswalk.yml
+- type: OAuthScopes
+  url: scopes/worklittle-scopes.yml
+- type: Conformance
+  url: conformance/worklittle-conformance.yml
+- type: ErrorCatalog
+  url: errors/worklittle-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/worklittle-lifecycle.yml
+- type: StatusPage
+  url: https://docs.worklittle.com/business/resources/status
+- type: Conventions
+  url: conventions/worklittle-conventions.yml
+- type: ChangeLog
+  url: changelog/worklittle-changelog.yml
+- type: DataModel
+  url: data-model/worklittle-data-model.yml
+- type: Webhooks
+  url: asyncapi/worklittle-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Plans
+  url: plans/worklittle-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/worklittle-rate-limits.yml
+- type: Overlay
+  url: overlays/worklittle-jobs-api-overlay.yaml
+- type: Overlay
+  url: overlays/worklittle-platform-api-overlay.yaml
+- type: GettingStarted
+  url: https://docs.worklittle.com/jobs/get-started/overview
+- type: Support
+  url: https://docs.worklittle.com/help/privacy-safety/contact-support
+- type: GitHubOrganization
+  url: https://github.com/worklittle
+- type: Pricing
+  url: https://docs.worklittle.com/jobs/get-started/pricing
+- type: SignUp
+  url: https://worklittle.com/login
+- type: TermsOfService
+  url: https://worklittle.com/terms-of-use
+- type: PrivacyPolicy
+  url: https://worklittle.com/privacy
+- type: Documentation
   url: https://docs.worklittle.com
 maintainers:
 - FN: Worklittle
@@ -69,20 +168,23 @@ x-provenance:
   added: '2026-08-24'
   method: searched
   source: https://docs.worklittle.com/llms.txt
-  note: >-
-    Submitted via apis.io/add on 2026-08-24 and auto-published by the gate at rating 15.
-    THE SUBMITTED APIs.json URL IS NOT A DOCUMENT. https://docs.worklittle.com/apis.json returns
-    200 and differs from a control path, which is why it survives a naive check — but the body is
-    HTML, the docs overview page. Distinctness from a control is NOT sufficient on a host that
-    renders unknown routes; the content type has to be read too.
-    The real locations came from the provider's own llms.txt, which names them: the specification
-    at /openapi/openapi.yaml and an agent manifest at /docs-agent-manifest.json.
-    THE SPECIFICATION IS $REF-BASED AND THE ROOT FILE IS ONLY 5.8KB. It declares 59 paths and zero
-    inline operations; every path is a $ref into one of three sibling documents. All three were
-    fetched and all three resolve: paths/jobs.yaml (10 operations), paths/platform.yaml (41), and
-    job-boards.yaml (8) — note the last sits at the openapi/ root, NOT under paths/, which is what
-    the $ref actually says. Reading the root file alone would report an API with no operations at
-    all; the 59 here is the resolved count.
-    One caution for anyone re-harvesting: this host returns a 5,636-byte HTML page with HTTP 200
-    for any path that does not exist, including inside openapi/paths/. A guessed filename comes
-    back looking like a successful fetch. Follow the $ref values, do not guess.
+  note: 'Submitted via apis.io/add on 2026-08-24 and auto-published by the gate at rating 15. THE SUBMITTED
+    APIs.json URL IS NOT A DOCUMENT. https://docs.worklittle.com/apis.json returns 200 and differs from
+    a control path, which is why it survives a naive check — but the body is HTML, the docs overview page.
+    Distinctness from a control is NOT sufficient on a host that renders unknown routes; the content type
+    has to be read too. The real locations came from the provider''s own llms.txt, which names them: the
+    specification at /openapi/openapi.yaml and an agent manifest at /docs-agent-manifest.json. THE SPECIFICATION
+    IS $REF-BASED AND THE ROOT FILE IS ONLY 5.8KB. It declares 59 paths and zero inline operations; every
+    path is a $ref into one of three sibling documents. All three were fetched and all three resolve:
+    paths/jobs.yaml (10 operations), paths/platform.yaml (41), and job-boards.yaml (8) — note the last
+    sits at the openapi/ root, NOT under paths/, which is what the $ref actually says. Reading the root
+    file alone would report an API with no operations at all; the 59 here is the resolved count. One caution
+    for anyone re-harvesting: this host returns a 5,636-byte HTML page with HTTP 200 for any path that
+    does not exist, including inside openapi/paths/. A guessed filename comes back looking like a successful
+    fetch. Follow the $ref values, do not guess.'
+image: https://docs.worklittle.com/social-banner.png
+x-enrichment:
+  date: '2026-09-03'
+  status: enriched
+  artifacts_added: 30
+  pass: local-v2
