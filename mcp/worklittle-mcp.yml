@@ -11,15 +11,18 @@ deployment:
   endpoint: https://mcp.worklittle.com/
   auth: api-key
   verified: probed
-  note: >-
-    Probed 2026-09-03: POST tools/list to https://mcp.worklittle.com/ (and /mcp) answers 200
-    anonymously with 13 Jobs tools including full inputSchema — saved verbatim to
-    mcp/worklittle-mcp-tools.json. Docs state 101 tools total; ATS/webhook/business tools require
-    an Authorization: Bearer sk-wl-api01- key. The server also participates in OAuth: its RFC 9728
-    oauth-protected-resource document names api.worklittle.com as authorization server
-    (authorization_code + PKCE, dynamic client registration, scopes jobs:read / jobs:apply /
-    jobs:apply_with_ai), so both api-key and OAuth flows are published. JSON-RPC 2.0 over
-    Streamable HTTP, protocol 2026-07-28 plus legacy 2025-06-18 / 2024-11-05 initialize.
+  note: 'Probed 2026-09-03: POST tools/list to https://mcp.worklittle.com/ (and /mcp) answers 200 anonymously
+    with 13 Jobs tools including full inputSchema — saved verbatim to mcp/worklittle-mcp-tools.json. Docs
+    state 101 tools total; ATS/webhook/business tools require an Authorization: Bearer sk-wl-api01- key.
+    The server also participates in OAuth: its RFC 9728 oauth-protected-resource document names api.worklittle.com
+    as authorization server (authorization_code + PKCE, dynamic client registration, scopes jobs:read
+    / jobs:apply / jobs:apply_with_ai), so both api-key and OAuth flows are published. JSON-RPC 2.0 over
+    Streamable HTTP, protocol 2026-07-28 plus legacy 2025-06-18 / 2024-11-05 initialize.'
+  probe_prior: (never probed)
+  probe: live
+  probe_why: live
+  checked: '2026-09-11'
+  source: claimed-backlog re-probe 2026-09-11
 protocol: JSON-RPC 2.0 over Streamable HTTP (2026-07-28; legacy 2025-06-18 / 2024-11-05)
 docs:
 - https://docs.worklittle.com/jobs/mcp
@@ -28,7 +31,8 @@ tool_count_documented: 101
 tool_count_anonymous: 13
 tools:
 - name: search_jobs
-  description: Search Worklittle's job listings by keyword, company, location, job type, seniority, or recency.
+  description: Search Worklittle's job listings by keyword, company, location, job type, seniority, or
+    recency.
 - name: search_companies
   description: Search companies in the Worklittle index.
 - name: get_job_details
