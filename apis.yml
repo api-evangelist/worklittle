@@ -32,7 +32,7 @@ tags:
 - Recruiting
 - Workforce Intelligence
 - Job Boards
-- Webhooks
+- Webhook
 - MCP
 tags_raw:
 - job search
@@ -59,11 +59,15 @@ apis:
     url: https://docs.worklittle.com
 - aid: worklittle:worklittle-jobs-api
   name: Worklittle Jobs API
-  description: The consumer Jobs surface of the Worklittle API — 9 operations for market-wide job search,
-    job detail, map clusters, suggestions, company search, market stats, account and profile resume upload.
+  description: >-
+    The consumer Jobs surface of the Worklittle API — 9 operations for market-wide job search, job detail,
+    map clusters, suggestions, company search, market stats, account and profile resume upload.
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Job
+  - Job Search
+  tags_raw:
   - Jobs
   - Job Search
   properties:
@@ -73,20 +77,198 @@ apis:
     url: https://docs.worklittle.com/api-reference
   - type: Documentation
     url: https://docs.worklittle.com/jobs/get-started/overview
-- aid: worklittle:worklittle-platform-api
-  name: Worklittle Business Platform API
-  description: The Business/platform surface of the Worklittle API — 32 operations for apply and Apply-with-AI
-    sessions, People Search, employer job listings, candidates and pipeline, employees, email and offers,
-    webhooks, documents, attendance, surveys and agent document tools.
+- aid: worklittle:worklittle-agent-documents-api
+  name: Worklittle Agent Documents API
+  description: The agent-documents API from Worklittle — 4 operation(s) for agent-documents.
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
-  - ATS
-  - Recruiting
-  - Webhooks
+  - agent-documents
   properties:
   - type: OpenAPI
-    url: openapi/worklittle-platform-api-openapi.yml
+    url: openapi/worklittle-agent-documents-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-apply-api
+  name: Worklittle Apply API
+  description: The apply API from Worklittle — 5 operation(s) for apply.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - apply
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-apply-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-attendance-api
+  name: Worklittle Attendance API
+  description: The attendance API from Worklittle — 1 operation(s) for attendance.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - attendance
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-attendance-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-billing-api
+  name: Worklittle Billing API
+  description: The billing API from Worklittle — 1 operation(s) for billing.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - billing
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-billing-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-candidates-api
+  name: Worklittle Candidates API
+  description: The candidates API from Worklittle — 3 operation(s) for candidates.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - candidates
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-candidates-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-documents-api
+  name: Worklittle Documents API
+  description: The documents API from Worklittle — 1 operation(s) for documents.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - documents
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-documents-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-email-offers-api
+  name: Worklittle Email Offers API
+  description: The email-offers API from Worklittle — 3 operation(s) for email-offers.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - email-offers
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-email-offers-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-employees-api
+  name: Worklittle Employees API
+  description: The employees API from Worklittle — 2 operation(s) for employees.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - employees
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-employees-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-employer-jobs-api
+  name: Worklittle Employer Jobs API
+  description: The employer-jobs API from Worklittle — 1 operation(s) for employer-jobs.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - employer-jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-employer-jobs-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-job-listings-api
+  name: Worklittle Job Listings API
+  description: The job-listings API from Worklittle — 2 operation(s) for job-listings.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - job-listings
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-job-listings-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-organization-api
+  name: Worklittle Organization API
+  description: The organization API from Worklittle — 2 operation(s) for organization.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - organization
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-organization-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-people-api
+  name: Worklittle People API
+  description: The people API from Worklittle — 3 operation(s) for people.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - people
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-people-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-surveys-api
+  name: Worklittle Surveys API
+  description: The surveys API from Worklittle — 2 operation(s) for surveys.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - surveys
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-surveys-api-openapi.yml
+  - type: APIReference
+    url: https://docs.worklittle.com/api-reference
+  - type: Documentation
+    url: https://docs.worklittle.com/business/get-started/overview
+- aid: worklittle:worklittle-webhooks-api
+  name: Worklittle Webhooks API
+  description: The webhooks API from Worklittle — 2 operation(s) for webhooks.
+  humanURL: https://docs.worklittle.com
+  baseURL: https://api.worklittle.com
+  tags:
+  - webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/worklittle-webhooks-api-openapi.yml
   - type: APIReference
     url: https://docs.worklittle.com/api-reference
   - type: Documentation
