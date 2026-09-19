@@ -31,7 +31,7 @@ tags:
 - ATS
 - Recruiting
 - Workforce Intelligence
-- Job Boards
+- Job Board
 - Webhook
 - MCP
 tags_raw:
@@ -49,6 +49,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Job Board
+  tags_raw:
   - Job Boards
   properties:
   - type: OpenAPI
@@ -83,6 +85,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Agent Documents
+  tags_raw:
   - agent-documents
   properties:
   - type: OpenAPI
@@ -97,6 +101,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Apply
+  tags_raw:
   - apply
   properties:
   - type: OpenAPI
@@ -111,6 +117,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Attendance
+  tags_raw:
   - attendance
   properties:
   - type: OpenAPI
@@ -125,6 +133,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Billing
+  tags_raw:
   - billing
   properties:
   - type: OpenAPI
@@ -139,6 +149,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Candidates
+  tags_raw:
   - candidates
   properties:
   - type: OpenAPI
@@ -153,6 +165,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Documents
+  tags_raw:
   - documents
   properties:
   - type: OpenAPI
@@ -181,6 +195,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Employees
+  tags_raw:
   - employees
   properties:
   - type: OpenAPI
@@ -209,6 +225,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Job Listings
+  tags_raw:
   - job-listings
   properties:
   - type: OpenAPI
@@ -223,6 +241,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Organization
+  tags_raw:
   - organization
   properties:
   - type: OpenAPI
@@ -237,6 +257,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - People
+  tags_raw:
   - people
   properties:
   - type: OpenAPI
@@ -251,6 +273,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Surveys
+  tags_raw:
   - surveys
   properties:
   - type: OpenAPI
@@ -265,6 +289,8 @@ apis:
   humanURL: https://docs.worklittle.com
   baseURL: https://api.worklittle.com
   tags:
+  - Webhook
+  tags_raw:
   - webhooks
   properties:
   - type: OpenAPI
