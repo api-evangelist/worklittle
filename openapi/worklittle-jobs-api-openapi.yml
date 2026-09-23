@@ -1,28 +1,46 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Worklittle Jobs API
   version: 1.0.0
-  description: 'Consumer Jobs surface of the Worklittle API: market-wide job search, job detail, map clusters, company
-    search, market stats, account, and profile resume upload. Resolved from the provider''s $ref-based root spec
-    at https://docs.worklittle.com/openapi/openapi.yaml (paths/jobs.yaml fragments). Authenticate with Authorization:
-    Bearer sk-wl-api01-....'
+  description: 'Consumer Jobs surface of the Worklittle API: market-wide job search, job detail, map clusters, company search, market stats, account, and profile resume upload. Resolved from the provider''s $ref-based root spec at https://docs.worklittle.com/openapi/openapi.yaml (paths/jobs.yaml fragments). Authenticate with Authorization: Bearer sk-wl-api01-....'
 servers:
 - url: https://api.worklittle.com
 security:
 - bearerAuth: []
+tags:
+- name: Jobs
 paths:
   /jobs:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: Search jobs
-      description: "List and search open jobs. Default order is newest first (posted_at).\n\nWhen `near_lat` and\
-        \ `near_lng` are set, optional `sort` is:\n- omit / `distance` — closest first (default)\n- `newest` — posted_at\
-        \ descending\n- `salary` — listed annualized pay descending, missing pay last\n\nWhen `company` is a single\
-        \ slug, optional `sort` controls company-board order:\n- `newest` (default) — posted_at descending\n- `oldest`\
-        \ — posted_at ascending\n- `relevance` — full company result set ranked by title match to `q` (or `title`);\n\
-        \  does **not** filter. Classic filtered search remains `company` + `q` without\n  `sort=relevance`.\n\n\
-        Omit `sort` for vanilla behavior (recommended for MCP and generic clients).\n"
+      description: 'List and search open jobs. Default order is newest first (posted_at).
+
+
+        When `near_lat` and `near_lng` are set, optional `sort` is:
+
+        - omit / `distance` — closest first (default)
+
+        - `newest` — posted_at descending
+
+        - `salary` — listed annualized pay descending, missing pay last
+
+
+        When `company` is a single slug, optional `sort` controls company-board order:
+
+        - `newest` (default) — posted_at descending
+
+        - `oldest` — posted_at ascending
+
+        - `relevance` — full company result set ranked by title match to `q` (or `title`);
+
+        does **not** filter. Classic filtered search remains `company` + `q` without
+
+        `sort=relevance`.
+
+
+        Omit `sort` for vanilla behavior (recommended for MCP and generic clients).'
       security:
       - bearerAuth: []
       parameters:
@@ -41,8 +59,7 @@ paths:
         in: query
         schema:
           type: string
-        description: Exact company slug(s). Bare comma-separated = OR include (meta,google). Prefix with - to exclude
-          (-lucid-motors,-tesla). Mix allowed.
+        description: Exact company slug(s). Bare comma-separated = OR include (meta,google). Prefix with - to exclude (-lucid-motors,-tesla). Mix allowed.
       - name: sort
         in: query
         schema:
@@ -53,8 +70,7 @@ paths:
           - relevance
           - distance
           - salary
-        description: Near lists — distance (default, omit) | newest | salary. Company lists (single slug) — newest
-          | oldest | relevance (relevance requires q or title).
+        description: Near lists — distance (default, omit) | newest | salary. Company lists (single slug) — newest | oldest | relevance (relevance requires q or title).
       - name: limit
         in: query
         schema:
@@ -66,18 +82,39 @@ paths:
       responses:
         '200':
           description: Job search results
+      operationId: getJobs
+      x-operation-id-source: derived
   /jobs/search:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: Search jobs
-      description: "List and search open jobs. Default order is newest first (posted_at).\n\nWhen `near_lat` and\
-        \ `near_lng` are set, optional `sort` is:\n- omit / `distance` — closest first (default)\n- `newest` — posted_at\
-        \ descending\n- `salary` — listed annualized pay descending, missing pay last\n\nWhen `company` is a single\
-        \ slug, optional `sort` controls company-board order:\n- `newest` (default) — posted_at descending\n- `oldest`\
-        \ — posted_at ascending\n- `relevance` — full company result set ranked by title match to `q` (or `title`);\n\
-        \  does **not** filter. Classic filtered search remains `company` + `q` without\n  `sort=relevance`.\n\n\
-        Omit `sort` for vanilla behavior (recommended for MCP and generic clients).\n"
+      description: 'List and search open jobs. Default order is newest first (posted_at).
+
+
+        When `near_lat` and `near_lng` are set, optional `sort` is:
+
+        - omit / `distance` — closest first (default)
+
+        - `newest` — posted_at descending
+
+        - `salary` — listed annualized pay descending, missing pay last
+
+
+        When `company` is a single slug, optional `sort` controls company-board order:
+
+        - `newest` (default) — posted_at descending
+
+        - `oldest` — posted_at ascending
+
+        - `relevance` — full company result set ranked by title match to `q` (or `title`);
+
+        does **not** filter. Classic filtered search remains `company` + `q` without
+
+        `sort=relevance`.
+
+
+        Omit `sort` for vanilla behavior (recommended for MCP and generic clients).'
       security:
       - bearerAuth: []
       parameters:
@@ -96,8 +133,7 @@ paths:
         in: query
         schema:
           type: string
-        description: Exact company slug(s). Bare comma-separated = OR include (meta,google). Prefix with - to exclude
-          (-lucid-motors,-tesla). Mix allowed.
+        description: Exact company slug(s). Bare comma-separated = OR include (meta,google). Prefix with - to exclude (-lucid-motors,-tesla). Mix allowed.
       - name: sort
         in: query
         schema:
@@ -108,8 +144,7 @@ paths:
           - relevance
           - distance
           - salary
-        description: Near lists — distance (default, omit) | newest | salary. Company lists (single slug) — newest
-          | oldest | relevance (relevance requires q or title).
+        description: Near lists — distance (default, omit) | newest | salary. Company lists (single slug) — newest | oldest | relevance (relevance requires q or title).
       - name: limit
         in: query
         schema:
@@ -121,10 +156,12 @@ paths:
       responses:
         '200':
           description: Job search results
+      operationId: getJobsSearch
+      x-operation-id-source: derived
   /jobs/{id}:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: Get job by id
       security:
       - bearerAuth: []
@@ -142,43 +179,67 @@ paths:
           - 'true'
           - '1'
           - 'yes'
-        description: Opt in to first-time AI job-description generation. Omit for raw description_text plus any
-          already-cached AI.
+        description: Opt in to first-time AI job-description generation. Omit for raw description_text plus any already-cached AI.
       responses:
         '200':
           description: Job detail
+      operationId: getJobsById
+      x-operation-id-source: derived
   /jobs/map:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: Jobs map clusters
       security:
       - bearerAuth: []
       responses:
         '200':
           description: Map payload
+      operationId: getJobsMap
+      x-operation-id-source: derived
   /jobs/stats:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: Market overview stats
       security:
       - bearerAuth: []
       responses:
         '200':
           description: Stats
+      operationId: getJobsStats
+      x-operation-id-source: derived
   /jobs/suggestions:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: Search jobs
-      description: "List and search open jobs. Default order is newest first (posted_at).\n\nWhen `near_lat` and\
-        \ `near_lng` are set, optional `sort` is:\n- omit / `distance` — closest first (default)\n- `newest` — posted_at\
-        \ descending\n- `salary` — listed annualized pay descending, missing pay last\n\nWhen `company` is a single\
-        \ slug, optional `sort` controls company-board order:\n- `newest` (default) — posted_at descending\n- `oldest`\
-        \ — posted_at ascending\n- `relevance` — full company result set ranked by title match to `q` (or `title`);\n\
-        \  does **not** filter. Classic filtered search remains `company` + `q` without\n  `sort=relevance`.\n\n\
-        Omit `sort` for vanilla behavior (recommended for MCP and generic clients).\n"
+      description: 'List and search open jobs. Default order is newest first (posted_at).
+
+
+        When `near_lat` and `near_lng` are set, optional `sort` is:
+
+        - omit / `distance` — closest first (default)
+
+        - `newest` — posted_at descending
+
+        - `salary` — listed annualized pay descending, missing pay last
+
+
+        When `company` is a single slug, optional `sort` controls company-board order:
+
+        - `newest` (default) — posted_at descending
+
+        - `oldest` — posted_at ascending
+
+        - `relevance` — full company result set ranked by title match to `q` (or `title`);
+
+        does **not** filter. Classic filtered search remains `company` + `q` without
+
+        `sort=relevance`.
+
+
+        Omit `sort` for vanilla behavior (recommended for MCP and generic clients).'
       security:
       - bearerAuth: []
       parameters:
@@ -197,8 +258,7 @@ paths:
         in: query
         schema:
           type: string
-        description: Exact company slug(s). Bare comma-separated = OR include (meta,google). Prefix with - to exclude
-          (-lucid-motors,-tesla). Mix allowed.
+        description: Exact company slug(s). Bare comma-separated = OR include (meta,google). Prefix with - to exclude (-lucid-motors,-tesla). Mix allowed.
       - name: sort
         in: query
         schema:
@@ -209,8 +269,7 @@ paths:
           - relevance
           - distance
           - salary
-        description: Near lists — distance (default, omit) | newest | salary. Company lists (single slug) — newest
-          | oldest | relevance (relevance requires q or title).
+        description: Near lists — distance (default, omit) | newest | salary. Company lists (single slug) — newest | oldest | relevance (relevance requires q or title).
       - name: limit
         in: query
         schema:
@@ -222,23 +281,26 @@ paths:
       responses:
         '200':
           description: Job search results
+      operationId: getJobsSuggestions
+      x-operation-id-source: derived
   /companies:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: Search companies
       security:
       - bearerAuth: []
       responses:
         '200':
           description: Companies
+      operationId: getCompanies
+      x-operation-id-source: derived
   /account:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: Authenticated API key owner
-      description: Returns the email, display name, photo, and resume readiness for the Bearer API key owner. Used
-        by MCP Apps for account rows and Apply resume gate.
+      description: Returns the email, display name, photo, and resume readiness for the Bearer API key owner. Used by MCP Apps for account rows and Apply resume gate.
       security:
       - bearerAuth: []
       responses:
@@ -271,13 +333,14 @@ paths:
                   resume_file_name:
                     type: string
                     nullable: true
+      operationId: getAccount
+      x-operation-id-source: derived
   /account/resume:
     put:
       tags:
-      - jobs
+      - Jobs
       summary: Upload profile resume (API key)
-      description: Upload a resume for the API key owner. JSON body with content_base64, or raw bytes with Content-Type
-        and X-Filename. Scope jobs:apply.
+      description: Upload a resume for the API key owner. JSON body with content_base64, or raw bytes with Content-Type and X-Filename. Scope jobs:apply.
       security:
       - bearerAuth: []
       requestBody:
@@ -299,34 +362,11 @@ paths:
       responses:
         '200':
           description: Resume stored
+      operationId: putAccountResume
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: sk-wl-api01
-  schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            documentation_url:
-              type: string
-              format: uri
-              description: Present on UNAUTHORIZED, FORBIDDEN, WORK_EMAIL_REQUIRED, PAYMENT_REQUIRED, RATE_LIMITED,
-                and QUOTA_EXCEEDED. Points at the Help article for that code.
-  parameters:
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-tags:
-- name: jobs

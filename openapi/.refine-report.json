@@ -1,19 +1,63 @@
 {
   "provider": "worklittle",
   "sources": [
-    "worklittle-job-boards.yaml",
-    "worklittle-openapi.yaml"
+    "_original/worklittle-job-boards.yaml",
+    "_original/worklittle-openapi.yaml",
+    "worklittle-agent-documents-api-openapi.yml",
+    "worklittle-apply-api-openapi.yml",
+    "worklittle-attendance-api-openapi.yml",
+    "worklittle-billing-api-openapi.yml",
+    "worklittle-candidates-api-openapi.yml",
+    "worklittle-documents-api-openapi.yml",
+    "worklittle-email-offers-api-openapi.yml",
+    "worklittle-employees-api-openapi.yml",
+    "worklittle-employer-jobs-api-openapi.yml",
+    "worklittle-job-listings-api-openapi.yml",
+    "worklittle-jobs-api-openapi.yml",
+    "worklittle-organization-api-openapi.yml",
+    "worklittle-people-api-openapi.yml",
+    "worklittle-surveys-api-openapi.yml",
+    "worklittle-webhooks-api-openapi.yml"
   ],
   "outputs": [
-    "worklittle-job-boards-api-openapi.yml"
+    "worklittle-job-boards-api-openapi.yml",
+    "worklittle-agent-documents-api-openapi.yml",
+    "worklittle-apply-api-openapi.yml",
+    "worklittle-attendance-api-openapi.yml",
+    "worklittle-billing-api-openapi.yml",
+    "worklittle-candidates-api-openapi.yml",
+    "worklittle-documents-api-openapi.yml",
+    "worklittle-email-offers-api-openapi.yml",
+    "worklittle-employees-api-openapi.yml",
+    "worklittle-employer-jobs-api-openapi.yml",
+    "worklittle-job-listings-api-openapi.yml",
+    "worklittle-jobs-api-openapi.yml",
+    "worklittle-organization-api-openapi.yml",
+    "worklittle-people-api-openapi.yml",
+    "worklittle-surveys-api-openapi.yml",
+    "worklittle-webhooks-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi/worklittle-job-boards.yaml",
-    "archived openapi/worklittle-openapi.yaml"
-  ],
+  "archived": [],
   "errors": [],
-  "warnings": [],
+  "warnings": [
+    "worklittle-agent-documents-api-openapi.yml: previously refined output kept for 4 operation(s) no archived document covers (e.g. /jobs/cover-letters post, /jobs/resumes post, /v1/agent/tool post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-apply-api-openapi.yml: previously refined output kept for 5 operation(s) no archived document covers (e.g. /jobs/applied get, /jobs/applied/{id} get, /jobs/apply post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-attendance-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /business/attendance get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-billing-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /usage get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-candidates-api-openapi.yml: previously refined output kept for 3 operation(s) no archived document covers (e.g. /business/candidates get, /business/candidates/{id} get, /business/jobs/pipeline-stages get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-documents-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /business/documents get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-email-offers-api-openapi.yml: previously refined output kept for 3 operation(s) no archived document covers (e.g. /business/emails get, /business/emails/sent get, /business/emails/sent/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-employees-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /business/employees get, /business/employees/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-employer-jobs-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /business/jobs/{id}/applications get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-job-listings-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /business/jobs get, /business/jobs/{id} patch); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-jobs-api-openapi.yml: previously refined output kept for 9 operation(s) no archived document covers (e.g. /account get, /account/resume put, /companies get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-organization-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /business/questions get, /business/teams get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-people-api-openapi.yml: previously refined output kept for 3 operation(s) no archived document covers (e.g. /people get, /people/{id}/contact get, /people/{id}/resume get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-surveys-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /business/surveys get, /business/surveys/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "worklittle-webhooks-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /business/webhooks get, /business/webhooks/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
   "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "worklittle-job-boards.yaml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "worklittle-job-boards.yaml: tagged paths GET /job-boards/{company} -> Job Boards",
     "worklittle-job-boards.yaml: tagged paths GET /job-boards/{company}/board -> Job Boards",
@@ -25,7 +69,9 @@
     "worklittle-job-boards.yaml: tagged paths POST /job-boards/{company}/jobs/{idOrSlug}/apply -> Job Boards",
     "worklittle-job-boards.yaml: declared missing tag: Job Boards",
     "worklittle-openapi.yaml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: written (+1 apis, 1 total)"
+    "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "worklittle-job-boards-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

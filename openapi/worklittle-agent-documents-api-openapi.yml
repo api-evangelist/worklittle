@@ -1,0 +1,82 @@
+openapi: 3.2.0
+info:
+  title: Worklittle Business Platform Agent Documents API
+  version: 1.0.0
+  description: 'Business / platform surface of the Worklittle API: apply and Apply-with-AI sessions, People Search, job listings and employer posting, candidates and pipeline, employees, email and offers, webhooks, documents, attendance, surveys, resumes, cover letters, and agent document tools. Resolved from the provider''s $ref-based root spec at https://docs.worklittle.com/openapi/openapi.yaml (paths/platform.yaml fragments). Authenticate with Authorization: Bearer sk-wl-api01-....'
+servers:
+- url: https://api.worklittle.com
+security:
+- bearerAuth: []
+tags:
+- name: Agent Documents
+paths:
+  /jobs/resumes:
+    post:
+      tags:
+      - Agent Documents
+      summary: Generate resume
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: ../openapi.yaml#/components/schemas/Error
+      operationId: postJobsResumes
+      x-operation-id-source: derived
+  /jobs/cover-letters:
+    post:
+      tags:
+      - Agent Documents
+      summary: Generate cover letter
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: ../openapi.yaml#/components/schemas/Error
+      operationId: postJobsCoverLetters
+      x-operation-id-source: derived
+  /v1/agent/tools:
+    get:
+      tags:
+      - Agent Documents
+      summary: List agent tools
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: ../openapi.yaml#/components/schemas/Error
+      operationId: getV1AgentTools
+      x-operation-id-source: derived
+  /v1/agent/tool:
+    post:
+      tags:
+      - Agent Documents
+      summary: Run agent tool
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: ../openapi.yaml#/components/schemas/Error
+      operationId: postV1AgentTool
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: sk-wl-api01

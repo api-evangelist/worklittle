@@ -1,0 +1,56 @@
+openapi: 3.2.0
+info:
+  title: Worklittle Business Platform Surveys API
+  version: 1.0.0
+  description: 'Business / platform surface of the Worklittle API: apply and Apply-with-AI sessions, People Search, job listings and employer posting, candidates and pipeline, employees, email and offers, webhooks, documents, attendance, surveys, resumes, cover letters, and agent document tools. Resolved from the provider''s $ref-based root spec at https://docs.worklittle.com/openapi/openapi.yaml (paths/platform.yaml fragments). Authenticate with Authorization: Bearer sk-wl-api01-....'
+servers:
+- url: https://api.worklittle.com
+security:
+- bearerAuth: []
+tags:
+- name: Surveys
+paths:
+  /business/surveys:
+    get:
+      tags:
+      - Surveys
+      summary: Surveys list/create
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: ../openapi.yaml#/components/schemas/Error
+      operationId: getBusinessSurveys
+      x-operation-id-source: derived
+  /business/surveys/{id}:
+    get:
+      tags:
+      - Surveys
+      summary: Survey detail
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: ../openapi.yaml#/components/schemas/Error
+      operationId: getBusinessSurveysById
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: sk-wl-api01

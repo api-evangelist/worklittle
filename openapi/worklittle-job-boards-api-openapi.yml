@@ -4,9 +4,7 @@ info:
   version: 1.0.0
   description: 'Public careers-board surface for custom employer sites.
 
-    Unauthenticated reads/applies use CORS `*`. Bearer API keys get higher GET rate limits.
-
-    '
+    Unauthenticated reads/applies use CORS `*`. Bearer API keys get higher GET rate limits.'
 servers:
 - url: https://api.worklittle.com
 tags:
@@ -26,6 +24,8 @@ paths:
                 type: string
       tags:
       - Job Boards
+      operationId: getJobBoardsByCompany
+      x-operation-id-source: derived
   /job-boards/{company}/board:
     get:
       summary: Organization + job list bundle
@@ -50,6 +50,8 @@ paths:
           description: Not modified
       tags:
       - Job Boards
+      operationId: getJobBoardsByCompanyBoard
+      x-operation-id-source: derived
   /job-boards/{company}/jobs:
     get:
       summary: List public jobs
@@ -67,6 +69,8 @@ paths:
           description: Job summaries with slug and url_path
       tags:
       - Job Boards
+      operationId: getJobBoardsByCompanyJobs
+      x-operation-id-source: derived
   /job-boards/{company}/facets:
     get:
       summary: Facet counts for listed jobs
@@ -79,6 +83,8 @@ paths:
           description: Facet counts
       tags:
       - Job Boards
+      operationId: getJobBoardsByCompanyFacets
+      x-operation-id-source: derived
   /job-boards/{company}/jobs/{idOrSlug}:
     get:
       summary: Job detail
@@ -99,6 +105,8 @@ paths:
             '
       tags:
       - Job Boards
+      operationId: getJobBoardsByCompanyJobsByIdOrSlug
+      x-operation-id-source: derived
   /job-boards/{company}/jobs/{idOrSlug}/json-ld:
     get:
       summary: Google JobPosting JSON-LD helper
@@ -115,6 +123,8 @@ paths:
           description: json_ld object plus description_sections
       tags:
       - Job Boards
+      operationId: getJobBoardsByCompanyJobsByIdOrSlugJsonLd
+      x-operation-id-source: derived
   /job-boards/{company}/jobs/{idOrSlug}/parse-resume:
     post:
       summary: Resume autofill for board forms
@@ -139,6 +149,8 @@ paths:
           description: role_closed | resume_autofill_disabled | validation errors
       tags:
       - Job Boards
+      operationId: postJobBoardsByCompanyJobsByIdOrSlugParseResume
+      x-operation-id-source: derived
   /job-boards/{company}/jobs/{idOrSlug}/apply:
     post:
       summary: Submit application (public)
@@ -172,25 +184,12 @@ paths:
             '
       tags:
       - Job Boards
+      operationId: postJobBoardsByCompanyJobsByIdOrSlugApply
+      x-operation-id-source: derived
 components:
   parameters:
-    department:
-      name: department
-      in: query
-      schema:
-        type: string
-    location:
-      name: location
-      in: query
-      schema:
-        type: string
-    employment_type:
-      name: employment_type
-      in: query
-      schema:
-        type: string
-    q:
-      name: q
+    cursor:
+      name: cursor
       in: query
       schema:
         type: string
@@ -203,13 +202,6 @@ components:
         - remote
         - hybrid
         - on_site
-    idOrSlug:
-      name: idOrSlug
-      in: path
-      required: true
-      description: public_job_id, posted job id, or public_slug
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -218,9 +210,11 @@ components:
         minimum: 1
         maximum: 100
         default: 25
-    cursor:
-      name: cursor
-      in: query
+    idOrSlug:
+      name: idOrSlug
+      in: path
+      required: true
+      description: public_job_id, posted job id, or public_slug
       schema:
         type: string
     company:
@@ -229,19 +223,27 @@ components:
       required: true
       schema:
         type: string
+    q:
+      name: q
+      in: query
+      schema:
+        type: string
+    location:
+      name: location
+      in: query
+      schema:
+        type: string
+    department:
+      name: department
+      in: query
+      schema:
+        type: string
+    employment_type:
+      name: employment_type
+      in: query
+      schema:
+        type: string
   schemas:
-    ResumeFile:
-      type: object
-      required:
-      - filename
-      - content_base64
-      properties:
-        filename:
-          type: string
-        content_base64:
-          type: string
-        mime:
-          type: string
     ApplyBody:
       type: object
       properties:
@@ -259,3 +261,15 @@ components:
           additionalProperties: true
         similar_job_alerts:
           type: boolean
+    ResumeFile:
+      type: object
+      required:
+      - filename
+      - content_base64
+      properties:
+        filename:
+          type: string
+        content_base64:
+          type: string
+        mime:
+          type: string

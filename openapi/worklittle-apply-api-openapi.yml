@@ -1,0 +1,188 @@
+openapi: 3.2.0
+info:
+  title: Worklittle Business Platform Apply API
+  version: 1.0.0
+  description: 'Business / platform surface of the Worklittle API: apply and Apply-with-AI sessions, People Search, job listings and employer posting, candidates and pipeline, employees, email and offers, webhooks, documents, attendance, surveys, resumes, cover letters, and agent document tools. Resolved from the provider''s $ref-based root spec at https://docs.worklittle.com/openapi/openapi.yaml (paths/platform.yaml fragments). Authenticate with Authorization: Bearer sk-wl-api01-....'
+servers:
+- url: https://api.worklittle.com
+security:
+- bearerAuth: []
+tags:
+- name: Apply
+paths:
+  /jobs/apply:
+    post:
+      tags:
+      - Apply
+      summary: API-key apply to hosted job
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: ../openapi.yaml#/components/schemas/Error
+      operationId: postJobsApply
+      x-operation-id-source: derived
+  /jobs/apply/{id}:
+    post:
+      tags:
+      - Apply
+      summary: API-key apply to hosted job
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: ../openapi.yaml#/components/schemas/Error
+      operationId: postJobsApplyById
+      x-operation-id-source: derived
+  /jobs/applied:
+    get:
+      tags:
+      - Apply
+      summary: List applied jobs
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 200
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+      - name: status
+        in: query
+        description: Pipeline stage filter
+        schema:
+          type: string
+          enum:
+          - saved
+          - in_progress
+          - applied
+          - interview
+          - offer
+          - rejected
+          - withdrawn
+          - skipped
+          - viewed
+      - name: fields
+        in: query
+        schema:
+          type: string
+          enum:
+          - lite
+          - full
+          default: lite
+      responses:
+        '200':
+          description: OK — count
+          jobs: null
+          has_more: null
+        '201':
+          description: Created
+        '400':
+          $ref: ../openapi.yaml#/components/schemas/Error
+      operationId: getJobsApplied
+      x-operation-id-source: derived
+  /jobs/applied/{id}:
+    get:
+      tags:
+      - Apply
+      summary: List applied jobs
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 200
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+      - name: status
+        in: query
+        description: Pipeline stage filter
+        schema:
+          type: string
+          enum:
+          - saved
+          - in_progress
+          - applied
+          - interview
+          - offer
+          - rejected
+          - withdrawn
+          - skipped
+          - viewed
+      - name: fields
+        in: query
+        schema:
+          type: string
+          enum:
+          - lite
+          - full
+          default: lite
+      responses:
+        '200':
+          description: OK — count
+          jobs: null
+          has_more: null
+        '201':
+          description: Created
+        '400':
+          $ref: ../openapi.yaml#/components/schemas/Error
+      operationId: getJobsAppliedById
+      x-operation-id-source: derived
+  /jobs/saved:
+    get:
+      tags:
+      - Apply
+      summary: Applied jobs board totals by stage
+      description: Cheap totals for /saved column badges. Returns `total` plus `by_status` for every pipeline stage. Does not return job cards.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK — total
+          by_status: null
+        '400':
+          $ref: ../openapi.yaml#/components/schemas/Error
+      operationId: getJobsSaved
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: sk-wl-api01

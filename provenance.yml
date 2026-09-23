@@ -6,7 +6,31 @@ artifacts:
   a2a/worklittle-agent-manifest.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-08-28T221322.yml:
+  asyncapi/worklittle-webhooks.yml:
+    method: searched
+    evidence: declared in the artifact
+  authentication/worklittle-authentication.yml:
+    method: searched
+    evidence: declared in the artifact
+  changelog/worklittle-changelog.yml:
+    method: searched
+    evidence: declared in the artifact
+  cli/worklittle-cli.yml:
+    method: searched
+    evidence: declared in the artifact
+  conformance/worklittle-conformance.yml:
+    method: derived
+    evidence: declared in the artifact
+  conventions/worklittle-conventions.yml:
+    method: searched
+    evidence: declared in the artifact
+  data-model/worklittle-data-model.yml:
+    method: derived
+    evidence: declared in the artifact
+  errors/worklittle-problem-types.yml:
+    method: searched
+    evidence: declared in the artifact
+  kin/checks-2026-09-05T072335.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-08-25T152020.yml:
@@ -36,9 +60,132 @@ artifacts:
   kin/score-2026-08-28T221322.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-29T213958.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-29T230545.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-30T203505.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-30T220315.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-31T223420.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-01T063623.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-01T210448.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-01T222808.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-02T211804.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-02T224043.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-03T161828.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-03T174231.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-04T062714.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-04T212454.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-04T224856.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T055819.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T072335.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  lifecycle/worklittle-lifecycle.yml:
+    method: searched
+    evidence: declared in the artifact
   llms/worklittle-llms.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
-  openapi/worklittle-job-boards-api-openapi.yml:
+  mcp/worklittle-mcp-tools.json:
     method: unknown
     evidence: no authorship recorded
+  mcp/worklittle-mcp.yml:
+    method: searched
+    evidence: declared in the artifact
+  mcp/worklittle-tool-crosswalk.yml:
+    method: derived
+    evidence: declared in the artifact
+  openapi/_original/worklittle-job-boards.yaml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/worklittle-openapi.yaml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/worklittle-paths-jobs.yaml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/worklittle-paths-platform.yaml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/worklittle-job-boards-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/worklittle-jobs-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/worklittle-platform-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  overlays/worklittle-jobs-api-overlay.yaml:
+    method: unknown
+    evidence: no authorship recorded
+  overlays/worklittle-platform-api-overlay.yaml:
+    method: unknown
+    evidence: no authorship recorded
+  packages/worklittle-packages.yml:
+    method: searched
+    evidence: declared in the artifact
+  plans/worklittle-plans-pricing.yml:
+    method: searched
+    evidence: declared in the artifact
+  rate-limits/worklittle-rate-limits.yml:
+    method: searched
+    evidence: declared in the artifact
+  scopes/worklittle-scopes.yml:
+    method: searched
+    evidence: declared in the artifact
+  security/worklittle-domain-security.yml:
+    method: unknown
+    evidence: no authorship recorded
+  skills/_index.yml:
+    method: searched
+    evidence: declared in the artifact
+  skills/worklittle-ats-webhooks.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/worklittle-embedded-careers-board.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/worklittle-search-and-apply.md:
+    method: generated
+    evidence: declared in the artifact
+  well-known/worklittle-oauth-authorization-server.json:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/worklittle-oauth-protected-resource.json:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/worklittle-well-known.yml:
+    method: searched
+    evidence: declared in the artifact

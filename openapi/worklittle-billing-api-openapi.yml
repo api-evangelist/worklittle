@@ -1,0 +1,72 @@
+openapi: 3.2.0
+info:
+  title: Worklittle Business Platform Billing API
+  version: 1.0.0
+  description: 'Business / platform surface of the Worklittle API: apply and Apply-with-AI sessions, People Search, job listings and employer posting, candidates and pipeline, employees, email and offers, webhooks, documents, attendance, surveys, resumes, cover letters, and agent document tools. Resolved from the provider''s $ref-based root spec at https://docs.worklittle.com/openapi/openapi.yaml (paths/platform.yaml fragments). Authenticate with Authorization: Bearer sk-wl-api01-....'
+servers:
+- url: https://api.worklittle.com
+security:
+- bearerAuth: []
+tags:
+- name: Billing
+paths:
+  /usage:
+    get:
+      tags:
+      - Billing
+      summary: Usage / audit logs with Destination fields (where_label, where_href)
+      description: Returns organization_logs (default source=all) including metered AI, free burns, and org activity. Each row may include where_label / where_href (Chat and Voice open absolute chat URLs when chat_id is known; Private has no link; job/survey/candidate destinations use product paths). Filter with source=public_api|platform_ai|org_activity for single-source cursor pagination (platform_ai and org_activity include where_*).
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: query
+        name: source
+        schema:
+          type: string
+          enum:
+          - all
+          - public_api
+          - platform_ai
+          - platform_fees
+          - org_activity
+      - in: query
+        name: since
+        schema:
+          type: integer
+      - in: query
+        name: until
+        schema:
+          type: integer
+      - in: query
+        name: cursor
+        schema:
+          type: string
+      - in: query
+        name: limit
+        schema:
+          type: integer
+      - in: query
+        name: api_key_id
+        schema:
+          type: string
+      - in: query
+        name: route
+        schema:
+          type: string
+      - in: query
+        name: status
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: ../openapi.yaml#/components/schemas/Error
+      operationId: getUsage
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: sk-wl-api01
