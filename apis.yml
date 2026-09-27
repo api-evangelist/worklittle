@@ -28,7 +28,7 @@ modified: '2026-09-03'
 specificationVersion: '0.23'
 tags:
 - Job Search
-- ATS
+- Applicant Tracking
 - Recruiting
 - Workforce Intelligence
 - Job Board
@@ -42,6 +42,7 @@ tags_raw:
 - job boards
 - webhooks
 - mcp
+- ATS
 apis:
 - aid: worklittle:worklittle-job-boards-api
   name: Worklittle Job Boards API
