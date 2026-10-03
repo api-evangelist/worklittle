@@ -188,8 +188,47 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
+    idOrSlug:
+      name: idOrSlug
+      in: path
+      required: true
+      description: public_job_id, posted job id, or public_slug
+      schema:
+        type: string
+    department:
+      name: department
+      in: query
+      schema:
+        type: string
+    q:
+      name: q
+      in: query
+      schema:
+        type: string
     location:
       name: location
+      in: query
+      schema:
+        type: string
+    workplace_type:
+      name: workplace_type
+      in: query
+      schema:
+        type: string
+        enum:
+        - remote
+        - hybrid
+        - on_site
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 25
+    employment_type:
+      name: employment_type
       in: query
       schema:
         type: string
@@ -201,45 +240,6 @@ components:
         type: string
     cursor:
       name: cursor
-      in: query
-      schema:
-        type: string
-    q:
-      name: q
-      in: query
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 25
-    workplace_type:
-      name: workplace_type
-      in: query
-      schema:
-        type: string
-        enum:
-        - remote
-        - hybrid
-        - on_site
-    department:
-      name: department
-      in: query
-      schema:
-        type: string
-    idOrSlug:
-      name: idOrSlug
-      in: path
-      required: true
-      description: public_job_id, posted job id, or public_slug
-      schema:
-        type: string
-    employment_type:
-      name: employment_type
       in: query
       schema:
         type: string
