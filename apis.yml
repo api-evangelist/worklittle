@@ -301,6 +301,9 @@ apis:
   - type: Documentation
     url: https://docs.worklittle.com/business/get-started/overview
 common:
+- type: CapabilityMap
+  url: capabilities/worklittle-capability-edges.yml
+  name: Worklittle Business Capability Map
 - type: Authentication
   url: authentication/worklittle-authentication.yml
 - type: DomainSecurity

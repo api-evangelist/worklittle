@@ -1,0 +1,75 @@
+slug: worklittle
+provider: Worklittle
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Candidates
+  spec_file: worklittle-candidates-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.9
+  evidence: GET /business/jobs/pipeline-stages "Pipeline stages"; GET /business/candidates "List or patch
+    candidates"; GET /business/candidates/{id} "Candidate detail"
+  reason: 'Applicant-tracking surface: candidate records and hiring pipeline stages in the employer workspace.
+    This plainly realises recruiting/hiring within Talent Acquisition Management.'
+- tag: Job Boards
+  spec_file: worklittle-job-boards-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.85
+  evidence: GET /job-boards/{company}/jobs "List public jobs"; POST /job-boards/{company}/jobs/{idOrSlug}/apply
+    "Submit application (public)"; "Public careers-board surface for custom employer sites"
+  reason: Employer careers board publishing vacancies and accepting applications, including resume autofill
+    — candidate sourcing and application intake, squarely Talent Acquisition Management.
+- tag: Job Listings
+  spec_file: worklittle-job-listings-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.85
+  evidence: GET /business/jobs "List or create job listings (POST)"; PATCH /business/jobs/{id} "Update
+    or delete listing"
+  reason: Employer-side creation and maintenance of job postings is requisition/vacancy management within
+    recruiting, i.e. Talent Acquisition Management.
+- tag: employer-jobs
+  spec_file: worklittle-employer-jobs-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.82
+  evidence: GET /business/jobs/{id}/applications  getBusinessJobsByIdApplications  List applications for
+    job
+  reason: Listing job applications against an employer posting is applicant tracking, squarely talent
+    acquisition (sourcing, recruiting, hiring).
+- tag: People
+  spec_file: worklittle-people-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.8
+  evidence: GET /people  Search people; GET /people/{id}/resume  Unlock person resume; GET /people/{id}/contact  Unlock
+    person contact field
+  reason: Candidate sourcing database — search people, unlock resumes and contact details — is classic
+    talent acquisition sourcing, consistent with the vendor's described 'sourcing' half of the platform.
+- tag: Employees
+  spec_file: worklittle-employees-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.75
+  evidence: GET /business/employees "List or create employees"; GET /business/employees/{id} "Employee
+    detail"
+  reason: CRUD over employee records in the employer hiring/HR workspace is employee master-record administration,
+    i.e. HR Operations Management.
