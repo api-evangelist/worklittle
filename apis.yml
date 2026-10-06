@@ -24,7 +24,7 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 created: '2026-08-24'
-modified: '2026-09-03'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 tags:
 - Job Search
@@ -301,6 +301,8 @@ apis:
   - type: Documentation
     url: https://docs.worklittle.com/business/get-started/overview
 common:
+- url: https://worklittle.com/feed.xml
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/worklittle-capability-edges.yml
   name: Worklittle Business Capability Map
