@@ -36,3 +36,29 @@ plans:
   - job listings and most ATS routes free with an API key
   overage: AI tokens; spend limits configurable at worklittle.com/business/billing#limits
 notes: Failed calls are free (tokens already used still bill). Custom pricing / higher limits via business@worklittle.com.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - subscription
+  units: []
+  plans:
+  - name: Pay as you go (Jobs API / MCP)
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods: []
+  - name: Worklittle Instant
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Business Platform
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods: []
