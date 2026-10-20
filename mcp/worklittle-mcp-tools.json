@@ -132,7 +132,7 @@
         ],
         "_meta": {
           "ui": {
-            "resourceUri": "ui://widget/jobs-map-598358ec2b.html"
+            "resourceUri": "ui://widget/jobs-map-6cb6a79306.html"
           },
           "openai/ui": {
             "entrypoints": [
@@ -144,7 +144,7 @@
               }
             ]
           },
-          "openai/outputTemplate": "ui://widget/jobs-map-598358ec2b.html",
+          "openai/outputTemplate": "ui://widget/jobs-map-6cb6a79306.html",
           "openai/widgetAccessible": true,
           "openai/toolInvocation/invoking": "Finding jobs…",
           "openai/toolInvocation/invoked": "Jobs ready",
